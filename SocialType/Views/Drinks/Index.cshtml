@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SocialType.Models.Drink>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Price List</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.Name</td>
+                <td>@a.Price</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+<button class="btn btn-primary" onclick="@Url.Action("Post", "Drinks")">Insert new drink</button>

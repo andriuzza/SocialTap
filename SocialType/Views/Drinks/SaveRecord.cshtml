@@ -1,0 +1,23 @@
+﻿@model SocialType.ViewModels.DrinkViewModel
+@{
+    ViewBag.Title = "Post";
+}
+
+<h2>Insert values of drink below</h2>
+
+<div class="container">
+    @using (Html.BeginForm("SaveRecord", "Drinks", FormMethod.Post)){
+
+        
+
+        @Html.TextBoxFor(model => model.Drink.Name, new { @class = "form-control", @placeholder = "Name" })
+        <br />
+        @Html.DropDownListFor(m => m.Drink.DrinkTypeId, new SelectList(Model.TypesDrinks, "Id", "Name"), "", new { @class = "form-control" })
+        <br />
+        @Html.TextBoxFor(model => model.Drink.Price, new { @class = "form-control", @placeholder = "Price" })
+        <br />
+        <input type="submit" value="Submit" class="btn btn-primary" />
+        <button class="btn btn-primary"onclick="@Url.Action("Index", "Drinks")">Cancel</button>
+    }
+    
+</div>

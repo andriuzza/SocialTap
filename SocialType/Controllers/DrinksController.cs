@@ -16,7 +16,7 @@ namespace SocialType.Controllers
         public ActionResult Index()/* ISVEDA*/
         {
             /* Isveda visa sarasa gerimu*/
-            IEnumerable<Drink> data = db.Drinks.ToList();
+            IEnumerable<Drink> data = db.drinks.ToList();
             return View(data);
         }
 
@@ -39,7 +39,7 @@ namespace SocialType.Controllers
                 drink.Name = vm.Drink.Name;
                 drink.Price = vm.Drink.Price;
                 drink.DrinkTypeId = vm.Drink.DrinkTypeId;
-                db.Drinks.Add(drink);
+                db.drinks.Add(drink);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

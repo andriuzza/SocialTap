@@ -4,22 +4,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - SocialTap</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-   
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SocialTap</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/locations">Home</a></li>
+                <li><a href="/drinks/post">New Drinks</a></li>
+                <li><a href="/drinks/index">Drinks list</a></li>
+            </ul>
+            <button class="btn btn-danger navbar-btn">Button</button>
+        </div>
+    </nav>
     <!-- viduje pages kitu puslapiu, o aplinkui kitur - layout default dizainas-->
-    <div class="container body-content">
+    <div class="container">
         @RenderBody()
-        <hr />
+    </div>
+    <!--Baigiasi cia-->
+    <div class="bottom text-center" id="footer">
         <footer>
             <p>&copy; @DateTime.Now.Year - SocialTap</p>
         </footer>
     </div>
-    <!--Baigiasi cia-->
-
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>

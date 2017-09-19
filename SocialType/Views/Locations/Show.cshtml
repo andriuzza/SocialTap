@@ -1,0 +1,32 @@
+﻿@model SocialType.ViewModels.LocationViewModel
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show @Model.loc.Name drinks</h2>
+<div class="col-md-12">
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>#</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model.drinks)
+            {
+                    <tr>
+                        <td>@a.Name</td>
+                        <td>@a.Price $</td>
+                        <td><a class="btn btn-primary btn-group-sm">Enter</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6"></div>
+</div>

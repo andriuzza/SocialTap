@@ -12,5 +12,6 @@ namespace SocialType.Models
         public float Price { get; set; }
         public DrinkType DrinkType { get; set; }
         public int DrinkTypeId { get; set; }
+        public string Location { get; set; }
     }
 }

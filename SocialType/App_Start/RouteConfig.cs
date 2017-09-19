@@ -16,7 +16,7 @@ namespace SocialType
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Drinks", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Locations", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

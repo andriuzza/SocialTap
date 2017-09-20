@@ -16,7 +16,7 @@ at different bars to a database
 MUST BE DONE TASKS AT THE END OF WEEK!!!!!
 --------------------------------------
 
-- CREATE LOGIN ABILITY TO THE WEBSITE - Mindaugas
+- CREATE LOGIN TO THE WEBSITE - Mindaugas
 - MAKE HOME, FEEDBACK PAGES (would be good to communicate for more details about them) - Julius
 - CREATE A MAP THAT SHOWS LOCATION TO A CARTAIN BAR - Andrius
 - CREATE AT LEAST SOMETHING FOR DETECTION (we are fall behind,no joke) - for all of us

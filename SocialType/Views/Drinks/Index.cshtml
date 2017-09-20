@@ -10,6 +10,7 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Rating</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,14 @@
             <tr>
                 <td>@a.Name</td>
                 <td>@a.Price</td>
+                @if ( a.Rating == 0)
+                {
+                    <td>No ratings yet</td>
+                }
+                else
+                {
+                    <td>@a.Rating</td>
+                }
             </tr>
         }
         </tbody>

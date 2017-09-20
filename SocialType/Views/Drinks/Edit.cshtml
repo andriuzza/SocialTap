@@ -1,0 +1,24 @@
+﻿@model SocialType.Models.Drink
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<h2>Insert values of drink below</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Save", "Drinks", FormMethod.Post))
+    {
+        <ul>
+            <li>@Model.Name</li>
+            <li>@Model.Location</li>
+            <li>@Model.Price</li>
+        </ul>
+        @Html.TextBoxFor(model => model.Rating, new { @class = "form-control", @placeholder = "Rating between 1 to 5" })
+        @Html.HiddenFor(m => m.Id)
+        <br />
+        <button type="submit" class="btn btn-primary" >Insert</button>
+    }
+
+</div>
+

@@ -9,20 +9,23 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>#</th>
-
                 </tr>
             </thead>
             <tbody>
                 @foreach (var a in Model.drinks)
             {
                     <tr>
-                        <td>@a.Name</td>
-                        <td>@a.Price $</td>
-                        <td><a class="btn btn-primary btn-group-sm">Enter</a></td>
-
+                        
+                        @{
+                            <td>@a.Id</td>
+                            var num = a.Id;
+                            <td><a href="/drinks/edit/@a.Id">@a.Name</a></td>
+                            <td>@a.Price $</td>
+                        }
+                        
                     </tr>
                 }
             </tbody>

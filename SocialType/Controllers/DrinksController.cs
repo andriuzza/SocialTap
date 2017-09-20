@@ -46,5 +46,24 @@ namespace SocialType.Controllers
             }
             return Content("Wrong input");
         }
+        [HttpPost]
+        public ActionResult Save(Drink drink)
+        {
+            var item = db.drinks.Single(m => m.Id == drink.Id);
+            item.HowManyTimes++;
+            item.Rating = (item.Rating + drink.Rating) / item.HowManyTimes;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult Edit(int? Id)
+        {
+            var drink = db.drinks.SingleOrDefault(m => m.Id == Id);
+            if (drink == null)
+            {
+                return HttpNotFound();
+            }
+            return View(drink);
+        }
     }
 }

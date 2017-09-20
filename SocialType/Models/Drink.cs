@@ -13,5 +13,12 @@ namespace SocialType.Models
         public DrinkType DrinkType { get; set; }
         public int DrinkTypeId { get; set; }
         public string Location { get; set; }
+        public double Rating { get; set; }
+        public int HowManyTimes { get; set; }
+
+
+
+        
+
     }
 }

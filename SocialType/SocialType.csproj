@@ -128,6 +128,7 @@
     <Compile Include="Controllers\DrinksController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="ViewModels\RatingViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +151,10 @@
     <Compile Include="Migrations\201709190935583_add.cs" />
     <Compile Include="Migrations\201709190935583_add.Designer.cs">
       <DependentUpon>201709190935583_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709201219504_RatingsOnDrinks.cs" />
+    <Compile Include="Migrations\201709201219504_RatingsOnDrinks.Designer.cs">
+      <DependentUpon>201709201219504_RatingsOnDrinks.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Drink.cs" />
@@ -174,6 +179,8 @@
     <Content Include="Views\Drinks\SaveRecord.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Locations\Show.cshtml" />
+    <Content Include="Views\Drinks\Ratings.cshtml" />
+    <Content Include="Views\Drinks\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -201,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709190935583_add.resx">
       <DependentUpon>201709190935583_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709201219504_RatingsOnDrinks.resx">
+      <DependentUpon>201709201219504_RatingsOnDrinks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

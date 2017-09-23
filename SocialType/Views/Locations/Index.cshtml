@@ -1,4 +1,13 @@
-﻿@model SocialType.Models.Location
+﻿<head>
+    <style type="text/css">
+        #map {
+            height: 400px;
+            width: 100%;
+            position: center;
+        }
+    </style>
+</head>
+@model SocialType.Models.Location
 @{
     ViewBag.Title = "Index";
 }
@@ -6,33 +15,69 @@
 <br />
 <br />
 <br />
-<div class="col-md-12">
-    <div class="col-md-6 col-md-offset-3">
-        <h2 class="text-center">Search for pubs</h2>
-        <br />
-    @using (Html.BeginForm("Index", "Locations", FormMethod.Post))
-    {
+<div class="row">
+    <div class="col-md-12">
+            <h2 class="text-center">Search for pubs</h2>
+            <br />
+            @using (Html.BeginForm("Index", "Locations", FormMethod.Post))
+            {
 
-        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
-        <br />
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+                <br />
 
-        <input type="submit" value="Submit" class="btn btn-primary" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
 
-        <button class="btn btn-primary" onclick="@Url.Action("Index", "Drinks")">Cancel</button>
-    }
-        @if (Model != null)
-        {
-            <h2>We found the pub, named @Model.Name in a database</h2>
-            @Html.ActionLink("Show", "Show", new { id = Model.Id })
-        }
+                <button class="btn btn-primary" onclick="@Url.Action("Index", "Drinks")">Cancel</button>
+            }
+            @if (Model != null)
+            {
+                <h2>We just found the pub, named "@Model.Name" in a database</h2>
+                @Html.ActionLink("Show", "Show", new { id = Model.Id })
 
-        else
-        {
-            <h2>Nothing been found yet, try to search</h2>
-        }
 
+                <div id="map"></div>
+                <script type="text/javascript">
+                function initMap() {
+                    // map options
+                    var options = {
+                        zoom: 16,
+                        center: { lat: 54.687157, lng: 25.279652 }
+                    }
+
+                    // new map
+                    var map = new google.maps.Map(document.getElementById('map'), options);
+                    //marker Add
+                    var marker = new google.maps.Marker({
+                        position: {lat: @Model.Latitude, lng: @Model.Longitude},
+                        map: map,
+                        icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+                    });
+                    // kai paspausim ant tos vietos zemelapyje, tures pop put langas
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: '<h3>@Model.Name</h3>'
+                    });
+
+                    marker.addListener('click', function () {
+                        infoWindow.open(map, marker);
+                    });
+
+                }
+                </script> <!--dabar reikia html tago, kad galetume sukrauti savo map'a-->
+
+
+
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtwsIAijZ2TTUVQ3tz2u_YuDPpiBXEF6k&callback=initMap">
+                </script>
+            }
+
+            else
+            {
+                <h2>Nothing has been found yet, try to search again</h2>
+            }
+
+        </div>
     </div>
-</div>
 
 
 

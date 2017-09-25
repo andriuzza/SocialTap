@@ -13,10 +13,43 @@ namespace SocialType.Controllers
         // GET: Drinks
         private MyDbContext db = new MyDbContext();
 
-        public ActionResult Index()/* ISVEDA*/
+        public ActionResult Index(string sortOrder, string searchString)/* ISVEDA*/
         {
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RateSortParm = sortOrder == "Rating" ? "rating_desc" : "Rating";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+
+            var drinks = from s in db.drinks
+                         select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                drinks = drinks.Where(s => s.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "rating_desc":
+                    drinks = drinks.OrderByDescending(s => s.Rating);
+                    break;
+                case "Price":
+                    drinks = drinks.OrderBy(s => s.Price);
+                    break;
+                case "name_desc":
+                    drinks = drinks.OrderByDescending(s => s.Name);
+                    break; /*nebutina sito case rasyti, nes niekada nebus name_desc, nes bus null, 
+                    o jei null tai - DEFAULT*/
+
+                default:
+                    drinks = drinks.OrderBy(s => s.Name);
+                    break;
+
+
+            }
+
             /* Isveda visa sarasa gerimu*/
-            IEnumerable<Drink> data = db.drinks.ToList();
+            IEnumerable<Drink> data = drinks.ToList();
             return View(data);
         }
 

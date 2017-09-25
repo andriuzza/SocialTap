@@ -1,4 +1,6 @@
-﻿using OpenCvSharp;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +27,11 @@ namespace SocialType.Controllers
                     Cv.CvtColor(image, grayImage, ColorConversion.BgrToGray);
                     Cv.Canny(grayImage, cannyImage, 60, 180);
 
-                   
+
+                  //  Image<Gray, Byte>[] = hsv1.Split();
+
+
+
                     byte[] cannyBytes = cannyImage.ToBytes(".png");
                     string base64 = Convert.ToBase64String(cannyBytes);
                 

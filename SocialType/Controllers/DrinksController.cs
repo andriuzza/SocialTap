@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace SocialType.Controllers
 {
+    [Authorize]
     public class DrinksController : Controller
     {
         // GET: Drinks

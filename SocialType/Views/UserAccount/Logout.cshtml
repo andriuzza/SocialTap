@@ -1,0 +1,18 @@
+﻿@model SocialType.Models.UserAccount
+@{
+    ViewBag.Title = "Logout";
+}
+
+<h2>Logout</h2>
+<h3>Do you wish to logout?</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Logout" class="btn btn-default" />
+        </div>
+    </div>
+}
+

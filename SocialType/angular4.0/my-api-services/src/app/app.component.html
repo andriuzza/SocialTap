@@ -1,0 +1,29 @@
+<!-- <nav>
+  <a routerLink-"/input" routerLinkActive-"active">Insert data</a>
+</nav> -->
+<div class="col-md-12">
+  <div class="col-md-6">
+<div class="row">
+    <div class="col-md-6"> 
+         <app-app-input 
+         (SendOut)="onOpen($event)"
+        ></app-app-input> 
+      </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+     <app-app-list
+    *ngFor="let u of locations"
+    [element]="u"
+    (call) = "GetDetails($event)"
+    >
+    </app-app-list>
+  </div>
+</div>
+</div>
+<div  class="col-md-6">
+<app-details
+[show1]="detaliu"
+></app-details>
+</div>
+</div>

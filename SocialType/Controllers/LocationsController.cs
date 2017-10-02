@@ -35,5 +35,32 @@ namespace SocialType.Controllers
             };
             return View(vm);
         }
+        public ActionResult PostNewBar()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult PostNewBar(LocationViewModel vm)
+        {
+            ViewBag.correct = "";
+            Location loc = new Location();
+            if (ModelState.IsValid)
+            {
+                loc.Name = vm.Name;
+                loc.Latitude = vm.Latitude;
+                loc.Longitude = vm.Longitude;
+                loc.Address = vm.Address;
+                
+                db.Locations.Add(loc);
+                db.SaveChanges();
+                ViewBag.correct = "Succeed";
+                
+            }
+            else
+            {
+                ViewBag.correct = "Failed";
+            }
+            return View();
+        }
     }
 }

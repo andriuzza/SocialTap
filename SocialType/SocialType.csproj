@@ -79,7 +79,6 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-
     <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenCvSharp-AnyCPU.2.4.10.20170306\lib\net45\OpenCvSharp.dll</HintPath>
     </Reference>
@@ -97,7 +96,6 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-
     <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -116,7 +114,6 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -243,7 +240,7 @@
     <Compile Include="Models\DrinkFeedback.cs" />
     <Compile Include="Models\DrinkType.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\MyDbContext.cs" />
+    <Compile Include="Services\MyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DrinkViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
@@ -263,16 +260,14 @@
     <Content Include="Views\Locations\Show.cshtml" />
     <Content Include="Views\Drinks\Ratings.cshtml" />
     <Content Include="Views\Drinks\Edit.cshtml" />
-
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Canny.cshtml" />
-
     <Content Include="Views\UserAccount\Register.cshtml" />
     <Content Include="Views\UserAccount\Login.cshtml" />
     <Content Include="Views\UserAccount\LoggedIn.cshtml" />
     <Content Include="Views\UserAccount\Logout.cshtml" />
     <Content Include="Views\UserAccount\LoggedOut.cshtml" />
-
+    <Content Include="Views\Locations\PostNewBar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -283,7 +278,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Feedback\" />
-    <Folder Include="Views\Location\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709171210179_NewMig.resx">

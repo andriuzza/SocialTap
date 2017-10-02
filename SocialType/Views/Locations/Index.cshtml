@@ -29,10 +29,10 @@
 
                 <button class="btn btn-primary" onclick="@Url.Action("Index", "Drinks")">Cancel</button>
             }
-            @if (Model != null)
+            @if (Model != null && Model.Name !=null)
             {
                 <h2>We just found the pub, named "@Model.Name" in a database</h2>
-                @Html.ActionLink("Show", "Show", new { id = Model.Id })
+                @Html.ActionLink("Show", "Show", new { id = Model.Id, })
 
 
                 <div id="map"></div>
@@ -54,7 +54,8 @@
                     });
                     // kai paspausim ant tos vietos zemelapyje, tures pop put langas
                     var infoWindow = new google.maps.InfoWindow({
-                        content: '<h3>@Model.Name</h3>'
+                        content: '<h3 style="color:black">@Model.Name</h3> <h4 style="color:black">@Model.Address</h4>  <input type="text" class="form-control" placeholder="Put your rating"> '
+                        
                     });
 
                     marker.addListener('click', function () {

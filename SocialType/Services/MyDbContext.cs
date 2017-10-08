@@ -18,7 +18,8 @@ namespace SocialType.Models
         public DbSet<DrinkFeedback> Feedbacks { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
-
+        public DbSet<DrinkImage> Images { get; set; }
+       
 
     }
 }

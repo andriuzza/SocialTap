@@ -11,6 +11,12 @@ namespace SocialType.Controllers
     public class LocationsController : Controller
     {
         private MyDbContext db = new MyDbContext();
+        private ILocationRepository repository;
+
+      public  LocationsController(ILocationRepository _repository)
+        {
+            repository = _repository;
+        }
         // GET: Locations
         public ActionResult Index()
         {
@@ -20,6 +26,7 @@ namespace SocialType.Controllers
         [HttpPost]
         public ActionResult Index(Location model)
         {
+            ViewBag.Naujas = "";
             Location filterModel = db.Locations.Where(m => m.Name == model.Name).FirstOrDefault();
             return View(filterModel);
         }
@@ -34,6 +41,41 @@ namespace SocialType.Controllers
                 
             };
             return View(vm);
+        }
+        [Authorize]
+        public ActionResult PostNewBar()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult PostNewBar(LocationViewModel vm)
+        {
+            ViewBag.correct = "";
+            Location loc = new Location();
+            if (ModelState.IsValid)
+            {
+                loc.Name = vm.Name;
+                loc.Latitude = vm.Latitude;
+                loc.Longitude = vm.Longitude;
+                loc.Address = vm.Address;
+                
+                db.Locations.Add(loc);
+                db.SaveChanges();
+                ViewBag.correct = "Succeed";
+                
+            }
+            else
+            {
+                ViewBag.correct = "Failed";
+            }
+            return View();
+        }
+
+        public ViewResult ShowBars() /*sub clas of actionresult */
+        {
+            IEnumerable<Location> loc = repository.Locations().ToList();
+            return View(loc);
         }
     }
 }

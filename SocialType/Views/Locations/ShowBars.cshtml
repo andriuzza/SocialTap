@@ -1,0 +1,15 @@
+﻿@model IEnumerable<SocialType.Models.Location>
+@{
+    ViewBag.Title = "ShowBars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowBars</h2>
+
+@foreach(var a in Model)
+{
+    <p>@a.Name</p>
+    <p>@a.Address</p>
+    <p>@a.Latitude</p>
+    <p>@a.Longitude</p>
+}

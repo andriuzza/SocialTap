@@ -48,23 +48,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV.DebuggerVisualizers.VS2017">
       <HintPath>..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.DebuggerVisualizers.VS2017.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI">
-      <HintPath>..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.UI.dll</HintPath>
+      <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.UI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Emgu.CV.UI.GL">
       <HintPath>..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.UI.GL.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.World">
-      <HintPath>..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.World.dll</HintPath>
+      <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=3.4.5.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation-Signed.3.4.5.0\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -79,7 +87,7 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-
+<<<<<<< HEAD
     <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenCvSharp-AnyCPU.2.4.10.20170306\lib\net45\OpenCvSharp.dll</HintPath>
     </Reference>
@@ -95,9 +103,12 @@
     <Reference Include="OpenCvSharp.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenCvSharp-AnyCPU.2.4.10.20170306\lib\net45\OpenCvSharp.UserInterface.dll</HintPath>
     </Reference>
+    <Reference Include="OpenTK.GLControl">
+      <HintPath>..\packages\OpenTK.GLControl.1.1.2225.0\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-
+=======
     <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -116,7 +127,7 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-
+>>>>>>> 44a2916f1c6fb1e31de72b1a6d51f91b16fc770f
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -127,6 +138,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -135,9 +149,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="ZedGraph">
-      <HintPath>..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\ZedGraph.dll</HintPath>
+    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +175,6 @@
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -183,6 +197,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="OpenTK.dll.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -197,8 +212,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DrinksController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,7 +225,16 @@
     <Compile Include="Migrations\201709250603538_login.Designer.cs">
       <DependentUpon>201709250603538_login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710071223478_ImageUpload.cs" />
+    <Compile Include="Migrations\201710071223478_ImageUpload.Designer.cs">
+      <DependentUpon>201710071223478_ImageUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DrinkImage.cs" />
+    <Compile Include="Models\EFLocationsRepository.cs" />
+    <Compile Include="Models\ILocationRepository.cs" />
     <Compile Include="Models\UserAccount.cs" />
+    <Compile Include="Services\SortingServices.cs" />
+    <Compile Include="ViewModels\DrinkImageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RatingViewModel.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,14 +269,18 @@
     <Compile Include="Models\DrinkFeedback.cs" />
     <Compile Include="Models\DrinkType.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\MyDbContext.cs" />
+    <Compile Include="Services\MyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DrinkViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
-    <Content Include="packages.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Drinks\Index.cshtml" />
@@ -258,21 +288,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Drinks\SaveRecord.cshtml" />
+    <Content Include="Views\Drinks\k.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Locations\Show.cshtml" />
     <Content Include="Views\Drinks\Ratings.cshtml" />
     <Content Include="Views\Drinks\Edit.cshtml" />
-
+<<<<<<< HEAD
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Canny.cshtml" />
-
+=======
     <Content Include="Views\UserAccount\Register.cshtml" />
     <Content Include="Views\UserAccount\Login.cshtml" />
     <Content Include="Views\UserAccount\LoggedIn.cshtml" />
     <Content Include="Views\UserAccount\Logout.cshtml" />
     <Content Include="Views\UserAccount\LoggedOut.cshtml" />
-
+>>>>>>> 44a2916f1c6fb1e31de72b1a6d51f91b16fc770f
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -282,8 +312,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Views\Feedback\" />
-    <Folder Include="Views\Location\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709171210179_NewMig.resx">
@@ -306,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709250603538_login.resx">
       <DependentUpon>201709250603538_login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710071223478_ImageUpload.resx">
+      <DependentUpon>201710071223478_ImageUpload.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -340,7 +373,9 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\OpenCvSharp-AnyCPU.2.4.10.20170306\build\OpenCvSharp-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp-AnyCPU.2.4.10.20170306\build\OpenCvSharp-AnyCPU.props'))" />
+    <Error Condition="!Exists('..\packages\Emgu.CV.3.2.0.2721\build\Emgu.CV.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Emgu.CV.3.2.0.2721\build\Emgu.CV.targets'))" />
   </Target>
+  <Import Project="..\packages\Emgu.CV.3.2.0.2721\build\Emgu.CV.targets" Condition="Exists('..\packages\Emgu.CV.3.2.0.2721\build\Emgu.CV.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -10,6 +10,7 @@ namespace SocialType.Controllers
 {
     public class UserAccountController : Controller
     {
+        private MyDbContext db = new MyDbContext();
         // GET: UserAccount
         public ActionResult Index()
         {
@@ -32,6 +33,7 @@ namespace SocialType.Controllers
                     db.SaveChanges();
                 }
                 ModelState.Clear();
+                
                 ViewBag.Message = account.FirstName + " " + account.LastName + " Successfully registered.";
              }
             return View();
@@ -39,7 +41,14 @@ namespace SocialType.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            
+            if (Session["UserID"] == null)
+            {
+                return View();
+            } else
+            {
+                return View("LoggedIn");
+            }
         }
         [HttpPost]
         public ActionResult Login(UserAccount user)
@@ -49,7 +58,7 @@ namespace SocialType.Controllers
                 UserAccount usr = null;
                 try
                 {
-                    usr = db.UserAccount.Single(u => u.Username == user.Username && u.Password == user.Password);
+                    usr = db.UserAccount.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
                 } catch(Exception e)
                 {
                     Console.Write(e.StackTrace);
@@ -85,14 +94,43 @@ namespace SocialType.Controllers
 
         public ActionResult LogOut()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View();
+            } else
+            {
+                return View("NotLoggedIn");
+            }
         }
 
         [HttpPost]
         public ActionResult LogOut(UserAccount user)
         {
             FormsAuthentication.SignOut();
+            Session["UserID"] = null;
+            Session["Username"] = null;
             return View("Loggedout");
         }
+
+        public ActionResult NotLoggedIn()
+        {
+            return View();
+        } 
+
+        public ActionResult ShowAllUsers()
+        {
+            UserAccounts acc = new UserAccounts();
+           
+            foreach(var user in db.UserAccount.ToList())
+            {
+                acc.Add(user);
+            }
+            foreach(UserAccount a in acc)
+            {
+                Console.WriteLine(a.FirstName);
+            }
+            return View(acc);
+        }
+
     }
 }

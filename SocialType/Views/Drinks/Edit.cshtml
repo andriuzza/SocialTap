@@ -3,22 +3,55 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-<h2>Insert values of drink below</h2>
 
-<div class="container">
-    @using (Html.BeginForm("Save", "Drinks", FormMethod.Post))
-    {
-        <ul>
-            <li>@Model.Name</li>
-            <li>@Model.Location</li>
-            <li>@Model.Price</li>
-        </ul>
-        @Html.TextBoxFor(model => model.Rating, new { @class = "form-control", @placeholder = "Rating between 1 to 5" })
-        @Html.HiddenFor(m => m.Id)
-        <br />
-        <button type="submit" class="btn btn-primary" >Insert</button>
-    }
 
+<div class="col-md-12">
+    <div class="col-md-4">
+        @using (Html.BeginForm("Save", "Drinks", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div style="background-image: url(https://s3-us-west-2.amazonaws.com/ratebeer-mobile-app-bucket/RateBeerAppLogo.png); height: 40vh
+;background-position:center;">
+                <img src="https://s3-us-west-2.amazonaws.com/ratebeer-mobile-app-bucket/RateBeerAppLogo.png" />
+            </div>
+            <div style="font-size: 30px; font-family: Arial">
+                <ul class="list-group">
+                    <li class="list-group-item">@Model.Name</li>
+                    <li class="list-group-item">@Model.Location</li>
+                    <li class="list-group-item">@Model.Price</li>
+                </ul>
+                @Html.TextBoxFor(model => model.Rating, new { @class = "form-control", @placeholder = "Rating between 1 to 5" })
+                @Html.HiddenFor(m => m.Id)
+
+                <input type="file" name="imageData" id="imageData" accept="image/*" /><br />
+                <input type="submit" class="btn btn-lg btn-danger" value="Submit" />
+
+
+
+            </div>
+        }
+
+    </div>
+    <div class="col-md-8 col-md-offset-8">
+        <div class="row">
+            <p style="font-size: 35px;">Rate "@Model.Name" drink</p>
+        </div>
+        
+            @foreach (var a in ViewBag.Array)
+            {
+                <div class="row">
+                    <ul>
+                        <li>
+                            <img src="data:image/png;base64,@a" style="  position: relative;
+                     float: left;
+                     width:  100px;
+                     height: 100px;
+                     background-repeat: no-repeat;
+                     background-size: cover;" />
+                        </li>
+                    </ul>
+                </div>
+            }
+            
+     
+    </div>
 </div>
-

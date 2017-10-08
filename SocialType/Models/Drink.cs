@@ -15,10 +15,5 @@ namespace SocialType.Models
         public string Location { get; set; }
         public double Rating { get; set; }
         public int HowManyTimes { get; set; }
-
-
-
-        
-
     }
 }

@@ -10,6 +10,7 @@ namespace SocialType.Controllers
 {
     public class UserAccountController : Controller
     {
+        private MyDbContext db = new MyDbContext();
         // GET: UserAccount
         public ActionResult Index()
         {
@@ -32,6 +33,7 @@ namespace SocialType.Controllers
                     db.SaveChanges();
                 }
                 ModelState.Clear();
+                
                 ViewBag.Message = account.FirstName + " " + account.LastName + " Successfully registered.";
              }
             return View();
@@ -39,6 +41,7 @@ namespace SocialType.Controllers
 
         public ActionResult Login()
         {
+            
             if (Session["UserID"] == null)
             {
                 return View();
@@ -113,6 +116,21 @@ namespace SocialType.Controllers
         {
             return View();
         } 
+
+        public ActionResult ShowAllUsers()
+        {
+            UserAccounts acc = new UserAccounts();
+           
+            foreach(var user in db.UserAccount.ToList())
+            {
+                acc.Add(user);
+            }
+            foreach(UserAccount a in acc)
+            {
+                Console.WriteLine(a.FirstName);
+            }
+            return View(acc);
+        }
 
     }
 }

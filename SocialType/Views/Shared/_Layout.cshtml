@@ -2,42 +2,98 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>@ViewBag.Title - SocialTap</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
+    <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none; background-color: white; opacity: 0.95" id="mySidebar">
+        <button class="w3-bar-item w3-button w3-large"
+                onclick="w3_close()">
+            Close &times;
+        </button>
+       
+           <a href="/locations" class="w3-bar-item w3-button">Home</a>
+            @if (Session["UserID"] != null)
+            {
+                <a href="/drinks/post" class="w3-bar-item w3-button">New Drinks</a>
+                <a href="/locations/PostNewBar" class="w3-bar-item w3-button">New Bar</a>
+                <a href="/drinks/index" class="w3-bar-item w3-button">Drinks list</a>
+                <a href="/UserAccount/ShowAllUsers" class="w3-bar-item w3-button">Show all users</a>
+           
+            }
+        <a href="/Contact/ContactForm" class="w3-bar-item w3-button">Contacts</a>
+        
+    </div>
+   
+    <!-- 
+         <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/locations">SocialTap</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/locations">Home</a></li>
-                <li><a href="/drinks/post">New Drinks</a></li>
-                <li><a href="/locations/PostNewBar">New Bar</a></li>
-                <li><a href="/drinks/index">Drinks list</a></li>
+            
+         
+                    <li><a href="/drinks/post">New Drinks</a></li>
+                    <li><a href="/locations/PostNewBar">New Bar</a></li>
+                    <li><a href="/drinks/index">Drinks list</a></li>
+                    <li><a href="/UserAccount/Logout">Logout</a></li>
+
+           
+             
                 <li><a href="/UserAccount/Login">Login</a></li>
-                <li><a href="/UserAccount/Logout">Logout</a></li>
+
                 <li><a href="/Contact/ContactForm">Contacts</a></li>
             </ul>
             <button class="btn btn-danger navbar-btn">Button</button>
             
         </div>
-    </nav>
-    <!-- viduje pages kitu puslapiu, o aplinkui kitur - layout default dizainas-->
-    <div class="container">
-        @RenderBody()
-    </div>
-    <!--Baigiasi cia-->
-    <div class="bottom text-center" id="footer">
-        <footer>
-            <p>&copy; @DateTime.Now.Year - SocialTap</p>
-        </footer>
-    </div>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+        viduje pages kitu puslapiu, o aplinkui kitur - layout default dizainas-->
+    <div id="main">
+
+        <div style="height: 40px; background-color:#B23000">
+           
+            <button id="openNav" class="w3-button w3-xlarge" onclick="w3_open()" style="height: 40px; background-color: #B23000">&#9776;</button>
+            @if (Session["UserID"] != null)
+            {
+                <a href="/UserAccount/Logout" class="w3-bar-item w3-button">Logout</a>
+            }
+            else
+            {
+                <a href="/UserAccount/Login" class="w3-bar-item w3-button">Login</a>
+                <a href="/Locations/ShowBars" class="w3-bar-item w3-button">Show bars</a>
+            }
+                    </div>11
+        <div class="w3-container">
+            @RenderBody()
+
+        </div>
+        </div>
+        <div class="bottom text-center" id="footer">
+            <footer>
+                <p>&copy; @DateTime.Now.Year - SocialTap</p>
+            </footer>
+        </div>
+        <script>
+            function w3_open() {
+                document.getElementById("main").style.marginLeft = "25%";
+                document.getElementById("mySidebar").style.width = "25%";
+                document.getElementById("mySidebar").style.display = "block";
+                document.getElementById("openNav").style.display = 'none';
+            }
+            function w3_close() {
+                document.getElementById("main").style.marginLeft = "0%";
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("openNav").style.display = "inline-block";
+            }
+        </script>
+
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

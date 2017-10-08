@@ -11,9 +11,10 @@ namespace SocialType.Controllers
     public class LocationsController : Controller
     {
         private MyDbContext db = new MyDbContext();
-        private ILocationRepository repository;
+        /*Dependecy injection */
+        private IRepository<Location> repository;
 
-      public  LocationsController(ILocationRepository _repository)
+      public  LocationsController(IRepository<Location> _repository)
         {
             repository = _repository;
         }
@@ -74,7 +75,7 @@ namespace SocialType.Controllers
 
         public ViewResult ShowBars() /*sub clas of actionresult */
         {
-            IEnumerable<Location> loc = repository.Locations().ToList();
+            IEnumerable<Location> loc = repository.GetAll().ToList();
             return View(loc);
         }
     }

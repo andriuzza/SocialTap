@@ -62,7 +62,8 @@ namespace SocialType.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ILocationRepository>().To<EFLocationsRepository>();
+            kernel.Bind<IRepository<Location>>().To<EFLocationsRepository>();
+            kernel.Bind<IRepository<Drink>>().To<EFDrinksRepository>();
         }        
     }
 }

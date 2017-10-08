@@ -15,8 +15,8 @@ namespace LocationControllerUnitTest
         [TestMethod]
         public void TestMethod1()
         {
-         Mock<ILocationRepository> mock = new Mock<ILocationRepository>();
-            mock.Setup(m=>m.Locations()).Returns(new Location[]
+            Mock<IRepository<Location>> mock = new Mock<IRepository<Location>>();
+            mock.Setup(m => m.GetAll()).Returns(new Location[]
             {
               new Location {Id = 245, Name="Snekutis", Address="Vilniaus g.1"},
               new Location {Id = 246, Name="Snekutis1", Address="Vilniaus g.2"},
@@ -29,8 +29,8 @@ namespace LocationControllerUnitTest
         [TestMethod]
         public void TestMethod2()
         {
-            Mock<ILocationRepository> mock = new Mock<ILocationRepository>();
-            mock.Setup(m => m.Locations()).Returns(new Location[]
+            Mock<IRepository<Location>> mock = new Mock<IRepository<Location>>();
+            mock.Setup(m => m.GetAll()).Returns(new Location[]
             {
               new Location {Id = 245, Name="Snekutis", Address="Vilniaus g.1"},
               new Location {Id = 246, Name="Snekutis1", Address="Vilniaus g.2"},

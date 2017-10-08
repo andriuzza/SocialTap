@@ -5,12 +5,13 @@ using System.Web;
 
 namespace SocialType.Models
 {
-    public class EFLocationsRepository: IRepository<Location>
+    public class EFDrinksRepository: IRepository<Drink>
     {
         MyDbContext db = new MyDbContext();
-        public IQueryable<Location> GetAll()
+        /*IQueryable works on client side */
+        public IQueryable<Drink> GetAll()
         {
-            return db.Locations; 
+            return db.drinks;
         }
     }
 }

@@ -236,8 +236,9 @@
       <DependentUpon>201710071223478_ImageUpload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DrinkImage.cs" />
+    <Compile Include="Models\EFDrinksRepository.cs" />
     <Compile Include="Models\EFLocationsRepository.cs" />
-    <Compile Include="Models\ILocationRepository.cs" />
+    <Compile Include="Models\IRepository.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Services\SortingServices.cs" />
     <Compile Include="ViewModels\DrinkImageViewModel.cs" />

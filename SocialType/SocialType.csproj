@@ -239,6 +239,7 @@
     <Compile Include="Models\EFLocationsRepository.cs" />
     <Compile Include="Models\ILocationRepository.cs" />
     <Compile Include="Models\UserAccount.cs" />
+    <Compile Include="Services\HttpContextManager.cs" />
     <Compile Include="Services\SortingServices.cs" />
     <Compile Include="ViewModels\DrinkImageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

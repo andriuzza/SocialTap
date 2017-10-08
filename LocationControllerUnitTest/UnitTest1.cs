@@ -24,7 +24,6 @@ namespace LocationControllerUnitTest
             }.AsQueryable());
 
             LocationsController ctrl = new LocationsController(mock.Object);
-
             var actual = (List<Location>)ctrl.ShowBars().Model;
         }
         [TestMethod]

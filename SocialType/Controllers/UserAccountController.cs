@@ -46,7 +46,7 @@ namespace SocialType.Controllers
             
             if (HttpContextManager.Current.Session["UserID"] == null)
             {
-                return View();
+                return View("Login");
             } else
             {
                 return View("LoggedIn");

@@ -19,12 +19,33 @@ namespace LocationControllerUnitTest
             mock.Setup(m=>m.Locations()).Returns(new Location[]
             {
               new Location {Id = 245, Name="Snekutis", Address="Vilniaus g.1"},
-              new Location {Id = 245, Name="Snekutis1", Address="Vilniaus g.2"},
-              new Location {Id = 245, Name="Snekutis2", Address="Vilniaus g.3"}
+              new Location {Id = 246, Name="Snekutis1", Address="Vilniaus g.2"},
+              new Location {Id = 247, Name="Snekutis2", Address="Vilniaus g.3"}
             }.AsQueryable());
 
             LocationsController ctrl = new LocationsController(mock.Object);
             var actual = (List<Location>)ctrl.ShowBars().Model;
+        }
+        [TestMethod]
+        public void TestMethod2()
+        {
+            Mock<ILocationRepository> mock = new Mock<ILocationRepository>();
+            mock.Setup(m => m.Locations()).Returns(new Location[]
+            {
+              new Location {Id = 245, Name="Snekutis", Address="Vilniaus g.1"},
+              new Location {Id = 246, Name="Snekutis1", Address="Vilniaus g.2"},
+              new Location {Id = 247, Name="Snekutis2", Address="Vilniaus g.3"}
+            }.AsQueryable());
+
+            LocationsController ctrl = new LocationsController(mock.Object);
+
+            var actual = (List<Location>)ctrl.ShowBars().Model;
+
+            var skaicius = actual.Where(m => m.Id == 245).SingleOrDefault();
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(skaicius.Id, 246);
+            /*Now TestMethod2 failed to pass a test, because
+             * the true ID is 245(not 246) and I made it in purpose to
+             see if a unit working properly and can catch wrong data*/
         }
     }
 }

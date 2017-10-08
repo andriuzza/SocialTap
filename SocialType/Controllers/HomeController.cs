@@ -18,7 +18,7 @@ namespace SocialType.Controllers
         }
         public ActionResult Canny(HttpPostedFileBase imageData)
         {
-            using (var image = IplImage.FromStream(imageData.InputStream, LoadMode.Color))
+            /*using (var image = IplImage.FromStream(imageData.InputStream, LoadMode.Color))
             {
                
                 using (var grayImage = new IplImage(image.Size, BitDepth.U8, 1))
@@ -37,7 +37,9 @@ namespace SocialType.Controllers
                 
                     ViewBag.Base64Image = base64;
                 }
-            }
+            }*/
+
+
             return View();
         }
     }

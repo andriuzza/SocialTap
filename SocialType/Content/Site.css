@@ -1,34 +1,34 @@
-﻿
-body {
-    background-color: darkslateblue;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 30px;
-  
-    color: antiquewhite;
-
+﻿body{
+    padding-right: 0;
 }
-
-#container {
-    min-height: 100%;
-    position: relative;
-}
-   
-
-#header {
-    background: #ff0;
-    padding: 10px;
-}
-
 #footer {
     position: fixed;
     left: 0px;
     bottom: 0px;
     height: 30px;
     width: 100%;
-    background: #1abc9c;
+    background-color: #B23000;
+    color: white;
 }
-#nav {
-    position: fixed;
-    top: 40px;
+
+#map {
+    height: 800px;
+    width: 700px;
 }
+a.my-class {
+    color: #333333;
+    font-size: 40px;
+}
+
+    a.my-class:active {
+        color: #666666
+    }
+
+    a.my-class:link {
+        color: #999999
+    }
+
+    a.my-class:visited {
+        color: #CCCCCC
+    }
+

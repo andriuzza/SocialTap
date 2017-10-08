@@ -1,16 +1,14 @@
-﻿@model  SocialType.ViewModels.DrinkViewModel
+﻿@Model SocialType.ViewModels.DrinkViewModel
 @{
-    ViewBag.Title = "View1";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Post";
 }
 
 <h2>Insert values of drink below</h2>
 
 <div class="container">
-    @using (Html.BeginForm("SaveRecord", "Drinks", FormMethod.Post))
-    {
+    @using (Html.BeginForm("SaveRecord", "Drinks", FormMethod.Post)){
 
-
+        
 
         @Html.TextBoxFor(model => model.Drink.Name, new { @class = "form-control", @placeholder = "Name" })
         <br />
@@ -19,9 +17,7 @@
         @Html.TextBoxFor(model => model.Drink.Price, new { @class = "form-control", @placeholder = "Price" })
         <br />
         <input type="submit" value="Submit" class="btn btn-primary" />
-        <button class="btn btn-primary" onclick="@Url.Action("Index", "Drinks")">Cancel</button>
+        <button class="btn btn-primary"onclick="@Url.Action("Index", "Drinks")">Cancel</button>
     }
-
+    
 </div>
-
-

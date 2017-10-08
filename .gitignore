@@ -1,4 +1,4 @@
-﻿# User-specific files
+# User-specific files
 *.suo
 *.user
 *.sln.docstates
@@ -48,6 +48,7 @@ build/
 *.pidb
 *.log
 *.scc
+*.catch
 
 # OS generated files #
 .DS_Store*

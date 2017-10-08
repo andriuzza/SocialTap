@@ -1,4 +1,5 @@
 ﻿using SocialType.Models;
+using SocialType.Services;
 using SocialType.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SocialType.Controllers
 {
+
     [Authorize]
     public class DrinksController : Controller
     {
@@ -16,42 +18,14 @@ namespace SocialType.Controllers
 
         public ActionResult Index(string sortOrder, string searchString)/* ISVEDA*/
         {
+
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.RateSortParm = sortOrder == "Rating" ? "rating_desc" : "Rating";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
 
-
-            var drinks = from s in db.drinks
-                         select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                drinks = drinks.Where(s => s.Name.Contains(searchString));
-            }
-
-            switch (sortOrder)
-            {
-                case "rating_desc":
-                    drinks = drinks.OrderByDescending(s => s.Rating);
-                    break;
-                case "Price":
-                    drinks = drinks.OrderBy(s => s.Price);
-                    break;
-                case "name_desc":
-                    drinks = drinks.OrderByDescending(s => s.Name);
-                    break; /*nebutina sito case rasyti, nes niekada nebus name_desc, nes bus null, 
-                    o jei null tai - DEFAULT*/
-
-                default:
-                    drinks = drinks.OrderBy(s => s.Name);
-                    break;
-
-
-            }
-
-            /* Isveda visa sarasa gerimu*/
-            IEnumerable<Drink> data = drinks.ToList();
-            return View(data);
+            SortingServices data = new SortingServices();
+            IEnumerable<Drink> sortedEl = data.SortElementBy(sortOrder, searchString);
+            return View(sortedEl);
         }
 
         public ActionResult Post()
@@ -81,8 +55,16 @@ namespace SocialType.Controllers
             return Content("Wrong input");
         }
         [HttpPost]
-        public ActionResult Save(Drink drink)
+        public ActionResult Save(Drink drink, HttpPostedFileBase imageData)
         {
+            if(imageData != null)
+            {
+                DrinkImage img = new DrinkImage();
+                img.ImageOfDrink = new byte[imageData.ContentLength];
+                img.DrinkId = drink.Id;
+                imageData.InputStream.Read(img.ImageOfDrink, 0, imageData.ContentLength);
+                db.Images.Add(img);
+            }
             var item = db.drinks.Single(m => m.Id == drink.Id);
             item.HowManyTimes++;
             item.Rating = (item.Rating + drink.Rating) / item.HowManyTimes;
@@ -93,10 +75,28 @@ namespace SocialType.Controllers
         public ActionResult Edit(int? Id)
         {
             var drink = db.drinks.SingleOrDefault(m => m.Id == Id);
+
+            ViewBag.NoImages = "";
+
             if (drink == null)
             {
                 return HttpNotFound();
             }
+            var imagesOfDrinks = db.Images.Where(m => m.DrinkId == Id).ToList();
+            if(imagesOfDrinks == null)
+            {
+                ViewBag.NoImages = "No images found of the drink";
+                return View(drink);
+            }
+          
+            string[] base64 = new string[imagesOfDrinks.Count];
+            int i = 0;
+            foreach(var a in imagesOfDrinks)
+            {
+                base64[i] = Convert.ToBase64String(a.ImageOfDrink);
+                i++;
+            }
+            ViewBag.Array = base64;
             return View(drink);
         }
     }

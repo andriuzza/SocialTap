@@ -9,7 +9,6 @@ using System.Web.SessionState;
 using System.Web.Http;
 using System.Data.Entity;
 using SocialType.Models;
-using SocialType.App_Start;
 
 namespace SocialType
 {
@@ -21,6 +20,7 @@ namespace SocialType
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
           
         }
     }

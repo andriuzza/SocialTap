@@ -19,8 +19,8 @@ namespace LocationControllerUnitTest
             mock.Setup(m=>m.Locations()).Returns(new Location[]
             {
               new Location {Id = 245, Name="Snekutis", Address="Vilniaus g.1"},
-              new Location {Id = 245, Name="Snekutis1", Address="Vilniaus g.2"},
-              new Location {Id = 245, Name="Snekutis2", Address="Vilniaus g.3"}
+              new Location {Id = 246, Name="Snekutis1", Address="Vilniaus g.2"},
+              new Location {Id = 247, Name="Snekutis2", Address="Vilniaus g.3"}
             }.AsQueryable());
 
             LocationsController ctrl = new LocationsController(mock.Object);

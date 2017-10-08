@@ -12,10 +12,7 @@ namespace SocialType.Controllers
     {
         private MyDbContext db = new MyDbContext();
         private ILocationRepository repository;
-     public LocationsController()
-        {
-            repository = new EFLocationsRepository();
-        }
+
       public  LocationsController(ILocationRepository _repository)
         {
             repository = _repository;

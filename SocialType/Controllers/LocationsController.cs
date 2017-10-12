@@ -23,6 +23,15 @@ namespace SocialType.Controllers
         {
             return View();
         }
+        public ActionResult View(int? Id)
+        {
+            var feedbackTemporary = db.LocationFeedback.Where(m => m.LocationID == Id).FirstOrDefault();
+            var vm = new FeedbackViewModel
+            {
+                feedback = feedbackTemporary,
+            };
+            return View(vm);
+        }
 
         [HttpPost]
         public ActionResult Index(Location model)
@@ -38,8 +47,6 @@ namespace SocialType.Controllers
             {
                 loc = location,
                 drinks = db.drinks.Where(m => m.Location == location.Name).ToList(),
-
-                
             };
             return View(vm);
         }

@@ -38,8 +38,7 @@
                 <br />
 
                 <input type="submit" value="Submit" class="btn btn-lg btn-primary" />
-                  
-                <button class="btn btn-lg btn-primary" onclick="@Url.Action("Index", "Drinks")">Cancel</button>
+                <button class="btn btn-lg btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Locations")'">Cancel</button>
                     <br />
                     <br />
                     <br />
@@ -49,6 +48,7 @@
                         <div style="background-color: black; opacity:0.6; padding: 7px;  padding-top: 35px; border-radius: 15px;">
                             <h2 style="color:aliceblue; font-weight: bold; opacity: 1;">We just found the pub, named "@Model.Name" in a database</h2>
                             <p style="font-size: 38px; opacity: 1">@Html.ActionLink("Show drinks", "Show", new { id = Model.Id, @class = "my-class" })</p>
+                            <p style="font-size: 38px; opacity: 1">@Html.ActionLink("Leave Feedback", "View", new { id = Model.Id})</p>
                         </div>
                        
                     }

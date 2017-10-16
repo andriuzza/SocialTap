@@ -12,6 +12,7 @@ namespace SocialType.Controllers
         {
             return View();
         }
+
         public ActionResult Canny(HttpPostedFileBase imageData)
         {
             using (var image = IplImage.FromStream(imageData.InputStream, LoadMode.Color))

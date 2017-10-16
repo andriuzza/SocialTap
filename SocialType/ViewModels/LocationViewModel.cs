@@ -1,16 +1,13 @@
 ﻿using SocialType.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace SocialType.ViewModels
 {
     public class LocationViewModel
     {
-        public Location loc { get; set; }
-        public IEnumerable<Drink> drinks { get; set; }
+        public Location Loc { get; set; }
+        public IEnumerable<Drink> Drinks { get; set; }
         public int Id { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Too short name")]
@@ -23,6 +20,6 @@ namespace SocialType.ViewModels
         [Required(ErrorMessage = "{0} is required")]
         public float Longitude { get; set; }
         public float Rating { get; set; }
-        public ICollection<int> ratings = new List<int>();
+        public ICollection<int> Ratings = new List<int>();
     }
 }

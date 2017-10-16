@@ -9,7 +9,7 @@ namespace SocialType.Models
 
         }
 
-        public DbSet<Drink> drinks { get; set; }
+        public DbSet<Drink> Drinks { get; set; }
         public DbSet<DrinkType> Types { get; set; }
         public DbSet<DrinkFeedback> Feedbacks { get; set; }
         public DbSet<Location> Locations { get; set; }

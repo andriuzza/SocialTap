@@ -57,13 +57,14 @@ namespace SocialType.Controllers
                 drink.Name = vm.Drink.Name;
                 drink.Price = vm.Drink.Price;
                 drink.DrinkTypeId = vm.Drink.DrinkTypeId;
-                db.drinks.Add(drink);
+                db.Drinks.Add(drink);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return Content("Wrong input");
         }
+
         [HttpPost]
         public ActionResult Save(Drink drink, HttpPostedFileBase imageData)
         {
@@ -75,16 +76,17 @@ namespace SocialType.Controllers
                 imageData.InputStream.Read(img.ImageOfDrink, 0, imageData.ContentLength);
                 db.Images.Add(img);
             }
-            var item = db.drinks.Single(m => m.Id == drink.Id);
+            var item = db.Drinks.Single(m => m.Id == drink.Id);
             item.HowManyTimes++;
             item.Rating = (item.Rating + drink.Rating) / item.HowManyTimes;
             db.SaveChanges();
 
             return RedirectToAction("Index");
         }
+
         public ActionResult Edit(int? Id)
         {
-            var drink = db.drinks.SingleOrDefault(m => m.Id == Id);
+            var drink = db.Drinks.SingleOrDefault(m => m.Id == Id);
 
             ViewBag.NoImages = "";
 

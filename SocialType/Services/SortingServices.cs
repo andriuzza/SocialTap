@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Collections;
+
 namespace SocialType.Services
 {
     
@@ -14,7 +13,7 @@ namespace SocialType.Services
         
         public IEnumerable<Drink> SortElementBy(string sortOrder, string searchString)
         {
-            var drinks = from s in db.drinks /*Linq selecting statemant */
+            var drinks = from s in db.Drinks /*Linq selecting statemant */
                          select s;
 
 

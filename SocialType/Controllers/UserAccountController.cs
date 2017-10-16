@@ -51,6 +51,7 @@ namespace SocialType.Controllers
                 return View("LoggedIn");
             }
         }
+
         [HttpPost]
         public ActionResult Login(UserAccount user)
         {

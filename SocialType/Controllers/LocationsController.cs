@@ -34,18 +34,20 @@ namespace SocialType.Controllers
             var location = db.Locations.Where(m => m.Id == Id).FirstOrDefault();
             var vm = new LocationViewModel
             {
-                loc = location,
-                drinks = db.drinks.Where(m => m.Location == location.Name).ToList(),
+                Loc = location,
+                Drinks = db.Drinks.Where(m => m.Location == location.Name).ToList(),
 
                 
             };
             return View(vm);
         }
+
         [Authorize]
         public ActionResult PostNewBar()
         {
             return View();
         }
+
         [Authorize]
         [HttpPost]
         public ActionResult PostNewBar(LocationViewModel vm)

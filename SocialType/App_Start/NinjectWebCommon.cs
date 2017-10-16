@@ -11,6 +11,7 @@ namespace SocialType.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using SocialType.Models;
+    using SocialType.Repositories;
 
     public static class NinjectWebCommon 
     {

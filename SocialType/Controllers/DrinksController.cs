@@ -16,12 +16,22 @@ namespace SocialType.Controllers
         // GET: Drinks
         private MyDbContext db = new MyDbContext();
 
-        public ActionResult Index(string sortOrder, string searchString)/* ISVEDA*/
+        public ActionResult Index(string sortOrder, string searchString = null)
         {
 
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.RateSortParm = sortOrder == "Rating" ? "rating_desc" : "Rating";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+            if (searchString != null)
+            {
+                ViewBag.SearchString = searchString;
+            }
+            if (ViewBag.SearchString != null)
+            {
+                searchString = ViewBag.SearchString;
+            }
+          
 
             SortingServices data = new SortingServices();
             IEnumerable<Drink> sortedEl = data.SortElementBy(sortOrder, searchString);
@@ -83,9 +93,10 @@ namespace SocialType.Controllers
                 return HttpNotFound();
             }
             var imagesOfDrinks = db.Images.Where(m => m.DrinkId == Id).ToList();
+            int skaicius = drink.Name.WordCount();
             if(imagesOfDrinks == null)
             {
-                ViewBag.NoImages = "No images found of the drink";
+                ViewBag.NoImages = "No images found of any drink";
                 return View(drink);
             }
           

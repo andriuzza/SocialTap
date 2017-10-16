@@ -6,8 +6,6 @@
 <h2>Drinks List</h2>
 @using (Html.BeginForm())
 {
-
-      
         <form>
             <div class="form-group">
                 <div class="col-md-3">
@@ -16,17 +14,14 @@
                 </div>
                 <input class="btn btn-success" type="submit" value="Search" />
              </div>
-        </form>
-        
-        
+        </form>       
 }
-
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
-                <th>@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
-                <th>@Html.ActionLink("Rating", "Index", new { sortOrder = ViewBag.RateSortParm })</th>
+                <th>@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.searchString != "" ? ViewBag.SearchString : null })</th>
+                <th>@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, searchString = ViewBag.searchString != "" ? ViewBag.SearchString : null })</th>
+                <th>@Html.ActionLink("Rating", "Index", new { sortOrder = ViewBag.RateSortParm, searchString = ViewBag.searchString != "" ? ViewBag.SearchString : null })</th>
             </tr>
         </thead>
         <tbody>

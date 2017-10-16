@@ -20,5 +20,7 @@ namespace SocialType.Controllers
             
             return View();
         }
+
+
     }
 }

@@ -16,12 +16,22 @@ namespace SocialType.Controllers
         // GET: Drinks
         private MyDbContext db = new MyDbContext();
 
-        public ActionResult Index(string sortOrder, string searchString)/* ISVEDA*/
+        public ActionResult Index(string sortOrder, string searchString = null)
         {
 
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.RateSortParm = sortOrder == "Rating" ? "rating_desc" : "Rating";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+            if (searchString != null)
+            {
+                ViewBag.SearchString = searchString;
+            }
+            if (ViewBag.SearchString != null)
+            {
+                searchString = ViewBag.SearchString;
+            }
+          
 
             SortingServices data = new SortingServices();
             IEnumerable<Drink> sortedEl = data.SortElementBy(sortOrder, searchString);
@@ -47,13 +57,14 @@ namespace SocialType.Controllers
                 drink.Name = vm.Drink.Name;
                 drink.Price = vm.Drink.Price;
                 drink.DrinkTypeId = vm.Drink.DrinkTypeId;
-                db.drinks.Add(drink);
+                db.Drinks.Add(drink);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return Content("Wrong input");
         }
+
         [HttpPost]
         public ActionResult Save(Drink drink, HttpPostedFileBase imageData)
         {
@@ -65,16 +76,17 @@ namespace SocialType.Controllers
                 imageData.InputStream.Read(img.ImageOfDrink, 0, imageData.ContentLength);
                 db.Images.Add(img);
             }
-            var item = db.drinks.Single(m => m.Id == drink.Id);
+            var item = db.Drinks.Single(m => m.Id == drink.Id);
             item.HowManyTimes++;
             item.Rating = (item.Rating + drink.Rating) / item.HowManyTimes;
             db.SaveChanges();
 
             return RedirectToAction("Index");
         }
+
         public ActionResult Edit(int? Id)
         {
-            var drink = db.drinks.SingleOrDefault(m => m.Id == Id);
+            var drink = db.Drinks.SingleOrDefault(m => m.Id == Id);
 
             ViewBag.NoImages = "";
 
@@ -83,9 +95,10 @@ namespace SocialType.Controllers
                 return HttpNotFound();
             }
             var imagesOfDrinks = db.Images.Where(m => m.DrinkId == Id).ToList();
+            int skaicius = drink.Name.WordCount();
             if(imagesOfDrinks == null)
             {
-                ViewBag.NoImages = "No images found of the drink";
+                ViewBag.NoImages = "No images found of any drink";
                 return View(drink);
             }
           

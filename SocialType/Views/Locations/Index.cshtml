@@ -84,7 +84,7 @@
                         map: map,
                         icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
                     });
-                    // kai paspausim ant tos vietos zemelapyje, tures pop put langas
+                    // when we click on the flag, the text field with an input should pop out
                     var infoWindow = new google.maps.InfoWindow({
                         content: '<h3 style="color:black">@Model.Name</h3> <h4 style="color:black">@Model.Address</h4>  <input type="text" class="form-control" placeholder="Put your rating"> '
 
@@ -95,21 +95,12 @@
                     });
 
                 }
-                    </script> <!--dabar reikia html tago, kad galetume sukrauti savo map'a-->
-
-
+                    </script>
 
                     <script async defer
                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtwsIAijZ2TTUVQ3tz2u_YuDPpiBXEF6k&callback=initMap">
                     </script>
                 </div>
             }
-
-           
-           
-        
     </div>
-
-
-
 </body>

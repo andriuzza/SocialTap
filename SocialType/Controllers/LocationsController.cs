@@ -1,9 +1,8 @@
 ﻿using SocialType.Models;
+using SocialType.Repositories;
 using SocialType.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SocialType.Controllers
@@ -27,7 +26,6 @@ namespace SocialType.Controllers
         [HttpPost]
         public ActionResult Index(Location model)
         {
-            ViewBag.Naujas = "";
             Location filterModel = db.Locations.Where(m => m.Name == model.Name).FirstOrDefault();
             return View(filterModel);
         }
@@ -36,18 +34,20 @@ namespace SocialType.Controllers
             var location = db.Locations.Where(m => m.Id == Id).FirstOrDefault();
             var vm = new LocationViewModel
             {
-                loc = location,
-                drinks = db.drinks.Where(m => m.Location == location.Name).ToList(),
+                Loc = location,
+                Drinks = db.Drinks.Where(m => m.Location == location.Name).ToList(),
 
                 
             };
             return View(vm);
         }
+
         [Authorize]
         public ActionResult PostNewBar()
         {
             return View();
         }
+
         [Authorize]
         [HttpPost]
         public ActionResult PostNewBar(LocationViewModel vm)
@@ -73,7 +73,7 @@ namespace SocialType.Controllers
             return View();
         }
 
-        public ViewResult ShowBars() /*sub clas of actionresult */
+        public ViewResult ShowBars() /*a sub class of actionresult */
         {
             IEnumerable<Location> loc = repository.GetAll().ToList();
             return View(loc);

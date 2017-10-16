@@ -28,49 +28,23 @@
         <a href="/Contact/ContactForm" class="w3-bar-item w3-button">Contacts</a>
         
     </div> 
-    <!-- 
-         <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/locations">SocialTap</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/locations">Home</a></li>
-            
-         
-                    <li><a href="/drinks/post">New Drinks</a></li>
-                    <li><a href="/locations/PostNewBar">New Bar</a></li>
-                    <li><a href="/drinks/index">Drinks list</a></li>
-                    <li><a href="/UserAccount/Logout">Logout</a></li>
-
-           
-             
-                <li><a href="/UserAccount/Login">Login</a></li>
-
-                <li><a href="/Contact/ContactForm">Contacts</a></li>
-            </ul>
-            <button class="btn btn-danger navbar-btn">Button</button>
-            
-        </div>
-        viduje pages kitu puslapiu, o aplinkui kitur - layout default dizainas-->
-    <div id="main">
+        <div id="main">
 
         <div style="height: 40px; background-color:#B23000">
            
             <button id="openNav" class="w3-button w3-xlarge" onclick="w3_open()" style="height: 40px; background-color: #B23000">&#9776;</button>
             @if (Session["UserID"] != null)
             {
-                <a href="/UserAccount/Logout" class="w3-bar-item w3-button">Logout</a>
+                <a href="~/UserAccount/Logout" class="w3-bar-item w3-button">Logout</a>
             }
             else
             {
                 <a href="/UserAccount/Login" class="w3-bar-item w3-button">Login</a>
                 <a href="/Locations/ShowBars" class="w3-bar-item w3-button">Show bars</a>
             }
-                    </div>11
+                    </div>
         <div class="w3-container">
             @RenderBody()
-
         </div>
         </div>
         <div class="bottom text-center" id="footer">

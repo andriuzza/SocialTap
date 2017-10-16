@@ -5,6 +5,7 @@ using SocialType.Models;
 using SocialType.Controllers;
 using System.Linq;
 using System.Collections.Generic;
+using SocialType.Repositories;
 
 namespace LocationControllerUnitTest
 {

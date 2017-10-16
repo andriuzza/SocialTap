@@ -1,9 +1,8 @@
 ﻿using SocialType.Models;
 using SocialType.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -52,9 +51,17 @@ namespace SocialType.Controllers
                 return View("LoggedIn");
             }
         }
+
         [HttpPost]
         public ActionResult Login(UserAccount user)
         {
+            Regex regex = new Regex("^[a-zA-Z''-'\\s]{1,40}$");
+            if (!regex.IsMatch(user.Username))
+            {
+                ModelState.AddModelError("", "Please check your username it contains illegal characters");
+                return View("Login");
+
+            }
             using (MyDbContext db = new MyDbContext())
             {
                 UserAccount usr = null;
@@ -70,6 +77,7 @@ namespace SocialType.Controllers
                 {
                     HttpContextManager.Current.Session["UserID"] = usr.UserID.ToString();
                     HttpContextManager.Current.Session["Username"] = usr.Username.ToString();
+                    FormsAuthentication.SetAuthCookie(user.Username.ToString(), false);
                     return View("LoggedIn");
                 }
                 else
@@ -110,6 +118,7 @@ namespace SocialType.Controllers
 
             HttpContextManager.Current.Session["UserID"] = null;
             Session["Username"] = null;
+            FormsAuthentication.SignOut();
             return View("Loggedout");
         }
 
@@ -117,21 +126,6 @@ namespace SocialType.Controllers
         {
             return View();
         } 
-
-        public ActionResult ShowAllUsers()
-        {
-            UserAccounts acc = new UserAccounts();
-           
-            foreach(var user in db.UserAccount.ToList())
-            {
-                acc.Add(user);
-            }
-            foreach(UserAccount a in acc)
-            {
-                Console.WriteLine(a.FirstName);
-            }
-            return View(acc);
-        }
 
         public MyDbContext getDb()
         {

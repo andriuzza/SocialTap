@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace SocialType.Models
 {
@@ -13,6 +10,6 @@ namespace SocialType.Models
         public float Latitude { get; set; }
         public float Longitude { get; set; }
         public float Rating { get; set; }
-        public ICollection<int> ratings = new List<int>();
+        public ICollection<int> Ratings = new List<int>();
     }
 }

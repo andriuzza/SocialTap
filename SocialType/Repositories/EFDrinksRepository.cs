@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SocialType.Models;
 using System.Linq;
-using System.Web;
 
-namespace SocialType.Models
+namespace SocialType.Repositories
 {
     public class EFDrinksRepository: IRepository<Drink>
     {
@@ -11,7 +9,7 @@ namespace SocialType.Models
         /*IQueryable works on client side */
         public IQueryable<Drink> GetAll()
         {
-            return db.drinks;
+            return db.Drinks;
         }
     }
 }

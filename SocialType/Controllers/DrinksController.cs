@@ -40,11 +40,11 @@ namespace SocialType.Controllers
 
         public ActionResult Post()
         {
-            var type = db.Types.ToList();
+            var drinkType = db.Types.ToList();
             var viewModel = new DrinkViewModel
             {
                 Drink = new Drink(),
-                TypesDrinks = type
+                TypesDrinks = drinkType
             };
             return View("SaveRecord",viewModel);
         }
@@ -95,7 +95,7 @@ namespace SocialType.Controllers
                 return HttpNotFound();
             }
             var imagesOfDrinks = db.Images.Where(m => m.DrinkId == Id).ToList();
-            int skaicius = drink.Name.WordCount();
+            int numberOfWords = drink.Name.WordCount();
             if(imagesOfDrinks == null)
             {
                 ViewBag.NoImages = "No images found of any drink";

@@ -3,8 +3,6 @@
     ViewBag.Title = "Edit";
 }
 
-
-
 <div class="col-md-12">
     <div class="col-md-4">
         @using (Html.BeginForm("Save", "Drinks", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -24,12 +22,8 @@
 
                 <input type="file" name="imageData" id="imageData" accept="image/*" /><br />
                 <input type="submit" class="btn btn-lg btn-danger" value="Submit" />
-
-
-
             </div>
         }
-
     </div>
     <div class="col-md-8 col-md-offset-8">
         <div class="row">
@@ -51,7 +45,11 @@
                     </ul>
                 </div>
             }
-            
+       
      
+    </div>
+    <div class="col-md-12">
+        <img src="data:image/png;base64,@ViewBag.Base64Image" />
+        <h1>@ViewBag.Suma</h1>
     </div>
 </div>

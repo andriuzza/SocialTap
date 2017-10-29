@@ -312,6 +312,7 @@
     <Content Include="Views\UserAccount\LoggedIn.cshtml" />
     <Content Include="Views\UserAccount\Logout.cshtml" />
     <Content Include="Views\UserAccount\LoggedOut.cshtml" />
+    <Content Include="Views\Drinks\ResultOfDetection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -61,7 +61,7 @@ namespace SocialType.Controllers
 
             db.SaveChanges();
 
-            using (MailMessage message = new MailMessage("andrius.butkevicius1@gmail.com", account.Email))
+            using (MailMessage message = new MailMessage("EMAIL@gmail.com", account.Email))
             {
                 message.Subject = "Activate Your Account [SocialTap]";
                 string body = "Hello, " + account.FirstName + " if you want to" +
@@ -74,7 +74,7 @@ namespace SocialType.Controllers
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
-                NetworkCredential net = new NetworkCredential("andrius.butkevicius1@gmail.com", "vcds1937123");
+                NetworkCredential net = new NetworkCredential("EMAIL@gmail.com", "PASSWORD");
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = net;
                 smtp.Port = 587;

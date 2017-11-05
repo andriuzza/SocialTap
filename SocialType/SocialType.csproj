@@ -281,6 +281,7 @@
     </Compile>
     <Compile Include="Models\NotificationUser.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Services\BarNotFoundException.cs" />
     <Compile Include="Services\NotificationEventArgs.cs" />
     <Compile Include="Services\NotificationHandling.cs" />
     <Compile Include="Services\ReviewWordCount.cs" />

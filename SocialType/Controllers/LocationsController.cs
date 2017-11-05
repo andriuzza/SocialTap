@@ -1,9 +1,12 @@
 ﻿using SocialType.Models;
 using SocialType.Repositories;
 using SocialType.ViewModels;
+using SocialType.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Windows;
 
 namespace SocialType.Controllers
 {
@@ -13,7 +16,7 @@ namespace SocialType.Controllers
         /*Dependecy injection */
         private IRepository<Location> repository;
 
-      public  LocationsController(IRepository<Location> _repository)
+        public LocationsController(IRepository<Location> _repository)
         {
             repository = _repository;
         }
@@ -27,6 +30,17 @@ namespace SocialType.Controllers
         public ActionResult Index(Location model)
         {
             Location filterModel = db.Locations.Where(m => m.Name == model.Name).FirstOrDefault();
+            try
+            {
+                if (filterModel == null)
+                {
+                    throw new BarNotFoundException("Couldnt find bar with this name");
+                }
+            }
+            catch 
+            {
+               
+            }
             return View(filterModel);
         }
         public ActionResult Show(int? Id)
@@ -37,7 +51,7 @@ namespace SocialType.Controllers
                 Loc = location,
                 Drinks = db.Drinks.Where(m => m.LocationOfDrinkId == location.Id).ToList(),
 
-                
+
             };
             return View(vm);
         }
@@ -60,11 +74,11 @@ namespace SocialType.Controllers
                 loc.Latitude = vm.Latitude;
                 loc.Longitude = vm.Longitude;
                 loc.Address = vm.Address;
-                
+
                 db.Locations.Add(loc);
                 db.SaveChanges();
                 ViewBag.correct = "Succeed";
-                
+
             }
             else
             {

@@ -23,5 +23,10 @@ namespace SocialType
 
           
         }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+
+        }
     }
+
 }

@@ -32,3 +32,15 @@ a.my-class {
         color: #CCCCCC
     }
 
+.badge-notify {
+    background: blue;
+    position: relative;
+    top: -15px;
+    left: -18px;
+}
+span.glyphicon-link {
+    font-size: 5.0em;
+}
+.iconMy {
+    padding-top: -5px;
+}

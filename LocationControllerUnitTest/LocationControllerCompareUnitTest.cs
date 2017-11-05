@@ -5,6 +5,7 @@ using SocialType.Models;
 using SocialType.Controllers;
 using System.Linq;
 using System.Collections.Generic;
+using SocialType.Repositories;
 
 namespace LocationControllerUnitTest
 {
@@ -45,7 +46,7 @@ namespace LocationControllerUnitTest
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(skaicius.Id, 246);
             /*Now TestMethod2 failed to pass a test, because
              * the true ID is 245(not 246) and I made it in purpose to
-             see if a unit working properly and can catch wrong data*/
+             see if a unit test working properly and can catch wrong data as well*/
         }
     }
 }

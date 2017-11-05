@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using SqlProviderServices = System.Data.Entity.SqlServer.SqlProviderServices;
+﻿using System.Data.Entity;
+
 namespace SocialType.Models
 {
     public class MyDbContext : DbContext
@@ -13,12 +9,32 @@ namespace SocialType.Models
 
         }
 
-        public DbSet<Drink> drinks { get; set; }
+        public DbSet<Drink> Drinks { get; set; }
         public DbSet<DrinkType> Types { get; set; }
         public DbSet<DrinkFeedback> Feedbacks { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
         public DbSet<DrinkImage> Images { get; set; }
-        public DbSet<LocationFeedback> LocationFeedback { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationUser> NotificationUsers { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Drink>()
+               .HasRequired(u => u.LocationOfDrink)
+               .WithMany(e => e.Drinks)
+               .HasForeignKey(a => a.LocationOfDrinkId)
+               .WillCascadeOnDelete(true);
+
+
+            modelBuilder.Entity<NotificationUser>()
+                .HasRequired(a => a.UserAccount)
+                .WithMany(b=>b.Notifications)
+                .WillCascadeOnDelete(false);
+
+
+        }
     }
+
+   
 }

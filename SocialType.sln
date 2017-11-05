@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialType", "SocialType\SocialType.csproj", "{9C86D48E-3ACA-4334-B257-B5157D35B087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationControllerUnitTest", "LocationControllerUnitTest\LocationControllerUnitTest.csproj", "{6352CBE2-D80B-49CC-B36F-E0770A5FA06A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "LocationControllerUnitTest\UnitTests.csproj", "{6352CBE2-D80B-49CC-B36F-E0770A5FA06A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

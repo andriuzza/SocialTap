@@ -1,10 +1,12 @@
 ﻿using SocialType.Models;
+using SocialType.Repositories;
 using SocialType.ViewModels;
+using SocialType.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Windows;
 
 namespace SocialType.Controllers
 {
@@ -14,7 +16,7 @@ namespace SocialType.Controllers
         /*Dependecy injection */
         private IRepository<Location> repository;
 
-      public  LocationsController(IRepository<Location> _repository)
+        public LocationsController(IRepository<Location> _repository)
         {
             repository = _repository;
         }
@@ -23,21 +25,22 @@ namespace SocialType.Controllers
         {
             return View();
         }
-        public ActionResult View(int? Id)
-        {
-            var feedbackTemporary = db.LocationFeedback.Where(m => m.LocationID == Id).FirstOrDefault();
-            var vm = new FeedbackViewModel
-            {
-                feedback = feedbackTemporary,
-            };
-            return View(vm);
-        }
 
         [HttpPost]
         public ActionResult Index(Location model)
         {
-            ViewBag.Naujas = "";
             Location filterModel = db.Locations.Where(m => m.Name == model.Name).FirstOrDefault();
+            try
+            {
+                if (filterModel == null)
+                {
+                    throw new BarNotFoundException("Couldnt find bar with this name");
+                }
+            }
+            catch 
+            {
+               
+            }
             return View(filterModel);
         }
         public ActionResult Show(int? Id)
@@ -45,16 +48,20 @@ namespace SocialType.Controllers
             var location = db.Locations.Where(m => m.Id == Id).FirstOrDefault();
             var vm = new LocationViewModel
             {
-                loc = location,
-                drinks = db.drinks.Where(m => m.Location == location.Name).ToList(),
+                Loc = location,
+                Drinks = db.Drinks.Where(m => m.LocationOfDrinkId == location.Id).ToList(),
+
+
             };
             return View(vm);
         }
+
         [Authorize]
         public ActionResult PostNewBar()
         {
             return View();
         }
+
         [Authorize]
         [HttpPost]
         public ActionResult PostNewBar(LocationViewModel vm)
@@ -67,11 +74,11 @@ namespace SocialType.Controllers
                 loc.Latitude = vm.Latitude;
                 loc.Longitude = vm.Longitude;
                 loc.Address = vm.Address;
-                
+
                 db.Locations.Add(loc);
                 db.SaveChanges();
                 ViewBag.correct = "Succeed";
-                
+
             }
             else
             {
@@ -80,7 +87,7 @@ namespace SocialType.Controllers
             return View();
         }
 
-        public ViewResult ShowBars() /*sub clas of actionresult */
+        public ViewResult ShowBars() /*a sub class of actionresult */
         {
             IEnumerable<Location> loc = repository.GetAll().ToList();
             return View(loc);

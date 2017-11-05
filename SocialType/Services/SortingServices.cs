@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Collections;
+
 namespace SocialType.Services
 {
     
@@ -14,8 +13,9 @@ namespace SocialType.Services
         
         public IEnumerable<Drink> SortElementBy(string sortOrder, string searchString)
         {
-            var drinks = from s in db.drinks
+            var drinks = from s in db.Drinks /*Linq selecting statemant */
                          select s;
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -32,8 +32,7 @@ namespace SocialType.Services
                     break;
                 case "name_desc":
                     drinks = drinks.OrderByDescending(s => s.Name);
-                    break; /*nebutina sito case rasyti, nes niekada nebus name_desc, nes bus null, 
-                    o jei null tai - DEFAULT*/
+                    break; 
 
                 default:
                     drinks = drinks.OrderBy(s => s.Name);
@@ -41,10 +40,6 @@ namespace SocialType.Services
 
 
             }
-
-            /* Isveda visa sarasa gerimu*/
-
-
 
             return drinks.ToList();
         }

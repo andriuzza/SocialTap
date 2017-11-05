@@ -1,27 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialType.Models
 {
-    public class UserAccount: UserAccounts
+    public class UserAccount : UserAccounts
     {
         [Key]
         public int UserID { get; set; }
+
         [Required(ErrorMessage = "Firstname is required")]
         public String FirstName { get; set; }
         [Required(ErrorMessage = "Lastname is required")]
         public String LastName { get; set; }
-        [Required(ErrorMessage = "Email is required")]
+        [Required(ErrorMessage = "email is required")]
         public String Email { get; set; }
         [Required(ErrorMessage = "Username is required")]
         public String Username { get; set; }
-        [Required(ErrorMessage = "Password is required")]
+        [Required(ErrorMessage = "password is required")]
         [DataType(DataType.Password)]
-        public String Password { get; set; }       
+        public String Password { get; set; }
+
+        public ICollection<NotificationUser> Notifications {get;set;}
+
+        public UserAccount()
+        {
+            Notifications = new Collection<NotificationUser>();
+        }
+      
+
+       
     }
     public class UserAccounts : IEnumerable
     {
@@ -36,7 +46,6 @@ namespace SocialType.Models
         {
             acc.Add(a);
         }
-
         public bool MoveNext()
         {
             if (acc.Count == 0 || acc.Count <= current)
@@ -45,5 +54,6 @@ namespace SocialType.Models
             }
             return true;
         }
+
     }
 }

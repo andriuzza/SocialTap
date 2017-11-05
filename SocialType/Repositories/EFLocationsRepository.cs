@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SocialType.Models;
 using System.Linq;
-using System.Web;
 
-namespace SocialType.Models
+namespace SocialType.Repositories
 {
     public class EFLocationsRepository: IRepository<Location>
     {

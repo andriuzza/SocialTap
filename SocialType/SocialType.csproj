@@ -116,6 +116,7 @@
     </Reference>
     <Reference Include="OpenTK.GLControl">
       <HintPath>..\packages\OpenTK.GLControl.1.1.2225.0\lib\net20\OpenTK.GLControl.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -162,6 +163,9 @@
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="Yuml.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Yuml.Net.1.3.0\lib\net45\Yuml.Net.dll</HintPath>
+    </Reference>
     <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
     </Reference>
@@ -204,6 +208,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="OpenTK.dll.config" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -221,11 +226,13 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\NotificationsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DrinksController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Migrations\201709250603538_login.cs" />
     <Compile Include="Migrations\201709250603538_login.Designer.cs">
@@ -235,48 +242,53 @@
     <Compile Include="Migrations\201710071223478_ImageUpload.Designer.cs">
       <DependentUpon>201710071223478_ImageUpload.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710121410278_LocFeedback.cs" />
-    <Compile Include="Migrations\201710121410278_LocFeedback.Designer.cs">
-      <DependentUpon>201710121410278_LocFeedback.cs</DependentUpon>
+    <Compile Include="Migrations\201711040726104_AddOneToMany.cs" />
+    <Compile Include="Migrations\201711040726104_AddOneToMany.Designer.cs">
+      <DependentUpon>201711040726104_AddOneToMany.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710121533584_locFeedbackFix.cs" />
-    <Compile Include="Migrations\201710121533584_locFeedbackFix.Designer.cs">
-      <DependentUpon>201710121533584_locFeedbackFix.cs</DependentUpon>
+    <Compile Include="Migrations\201711041120164_AddNotification.cs" />
+    <Compile Include="Migrations\201711041120164_AddNotification.Designer.cs">
+      <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\NotificationUser.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Services\BarNotFoundException.cs" />
+    <Compile Include="Services\NotificationEventArgs.cs" />
+    <Compile Include="Services\NotificationHandling.cs" />
+    <Compile Include="Services\ReviewWordCount.cs" />
     <Compile Include="Models\DrinkImage.cs" />
-    <Compile Include="Models\EFDrinksRepository.cs" />
-    <Compile Include="Models\EFLocationsRepository.cs" />
-    <Compile Include="Models\IRepository.cs" />
-    <Compile Include="Models\LocationFeedback.cs" />
+    <Compile Include="Repositories\EFDrinksRepository.cs" />
+    <Compile Include="Repositories\EFLocationsRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Services\HttpContextManager.cs" />
+    <Compile Include="Services\SendNotification.cs" />
     <Compile Include="Services\SortingServices.cs" />
     <Compile Include="ViewModels\DrinkImageViewModel.cs" />
-    <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RatingViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709171210179_NewMig.cs" />
-    <Compile Include="Migrations\201709171210179_NewMig.Designer.cs">
-      <DependentUpon>201709171210179_NewMig.cs</DependentUpon>
+    <Compile Include="Migrations\201709171210179_drink_type_location_entities.cs" />
+    <Compile Include="Migrations\201709171210179_drink_type_location_entities.Designer.cs">
+      <DependentUpon>201709171210179_drink_type_location_entities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201709171307023_SecondMigrationForForeignKey.cs" />
     <Compile Include="Migrations\201709171307023_SecondMigrationForForeignKey.Designer.cs">
       <DependentUpon>201709171307023_SecondMigrationForForeignKey.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709171453282_new.cs" />
-    <Compile Include="Migrations\201709171453282_new.Designer.cs">
-      <DependentUpon>201709171453282_new.cs</DependentUpon>
+    <Compile Include="Migrations\201709171453282_DrinkProperties.cs" />
+    <Compile Include="Migrations\201709171453282_DrinkProperties.Designer.cs">
+      <DependentUpon>201709171453282_DrinkProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709171458479_new1.cs" />
-    <Compile Include="Migrations\201709171458479_new1.Designer.cs">
-      <DependentUpon>201709171458479_new1.cs</DependentUpon>
+    <Compile Include="Migrations\201709171458479_drinkPropertiesFixes.cs" />
+    <Compile Include="Migrations\201709171458479_drinkPropertiesFixes.Designer.cs">
+      <DependentUpon>201709171458479_drinkPropertiesFixes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709190935583_add.cs" />
-    <Compile Include="Migrations\201709190935583_add.Designer.cs">
-      <DependentUpon>201709190935583_add.cs</DependentUpon>
+    <Compile Include="Migrations\201709190935583_locationfixes.cs" />
+    <Compile Include="Migrations\201709190935583_locationfixes.Designer.cs">
+      <DependentUpon>201709190935583_locationfixes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201709201219504_RatingsOnDrinks.cs" />
     <Compile Include="Migrations\201709201219504_RatingsOnDrinks.Designer.cs">
@@ -306,7 +318,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Drinks\k.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Locations\Show.cshtml" />
     <Content Include="Views\Drinks\Ratings.cshtml" />
@@ -318,7 +329,9 @@
     <Content Include="Views\UserAccount\LoggedIn.cshtml" />
     <Content Include="Views\UserAccount\Logout.cshtml" />
     <Content Include="Views\UserAccount\LoggedOut.cshtml" />
-    <Content Include="Views\Locations\View.cshtml" />
+    <Content Include="Views\Drinks\ResultOfDetection.cshtml" />
+    <Content Include="Views\Drinks\Post.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -332,20 +345,20 @@
     <Folder Include="Views\Feedback\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709171210179_NewMig.resx">
-      <DependentUpon>201709171210179_NewMig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709171210179_drink_type_location_entities.resx">
+      <DependentUpon>201709171210179_drink_type_location_entities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709171307023_SecondMigrationForForeignKey.resx">
       <DependentUpon>201709171307023_SecondMigrationForForeignKey.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709171453282_new.resx">
-      <DependentUpon>201709171453282_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709171453282_DrinkProperties.resx">
+      <DependentUpon>201709171453282_DrinkProperties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709171458479_new1.resx">
-      <DependentUpon>201709171458479_new1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709171458479_drinkPropertiesFixes.resx">
+      <DependentUpon>201709171458479_drinkPropertiesFixes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709190935583_add.resx">
-      <DependentUpon>201709190935583_add.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709190935583_locationfixes.resx">
+      <DependentUpon>201709190935583_locationfixes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709201219504_RatingsOnDrinks.resx">
       <DependentUpon>201709201219504_RatingsOnDrinks.cs</DependentUpon>
@@ -356,11 +369,11 @@
     <EmbeddedResource Include="Migrations\201710071223478_ImageUpload.resx">
       <DependentUpon>201710071223478_ImageUpload.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710121410278_LocFeedback.resx">
-      <DependentUpon>201710121410278_LocFeedback.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711040726104_AddOneToMany.resx">
+      <DependentUpon>201711040726104_AddOneToMany.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710121533584_locFeedbackFix.resx">
-      <DependentUpon>201710121533584_locFeedbackFix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711041120164_AddNotification.resx">
+      <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

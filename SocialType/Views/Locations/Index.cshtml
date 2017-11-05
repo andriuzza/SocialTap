@@ -38,7 +38,8 @@
                 <br />
 
                 <input type="submit" value="Submit" class="btn btn-lg btn-primary" />
-                <button class="btn btn-lg btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Locations")'">Cancel</button>
+                  
+                    <input type="button" value="Cancel" onclick="window.location='@Url.Action("Index", "Locations")'" class="btn btn-lg btn-primary" />
                     <br />
                     <br />
                     <br />
@@ -48,7 +49,6 @@
                         <div style="background-color: black; opacity:0.6; padding: 7px;  padding-top: 35px; border-radius: 15px;">
                             <h2 style="color:aliceblue; font-weight: bold; opacity: 1;">We just found the pub, named "@Model.Name" in a database</h2>
                             <p style="font-size: 38px; opacity: 1">@Html.ActionLink("Show drinks", "Show", new { id = Model.Id, @class = "my-class" })</p>
-                            <p style="font-size: 38px; opacity: 1">@Html.ActionLink("Leave Feedback", "View", new { id = Model.Id})</p>
                         </div>
                        
                     }
@@ -84,7 +84,7 @@
                         map: map,
                         icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
                     });
-                    // kai paspausim ant tos vietos zemelapyje, tures pop put langas
+                    // when we click on the flag, the text field with an input should pop out
                     var infoWindow = new google.maps.InfoWindow({
                         content: '<h3 style="color:black">@Model.Name</h3> <h4 style="color:black">@Model.Address</h4>  <input type="text" class="form-control" placeholder="Put your rating"> '
 
@@ -95,21 +95,12 @@
                     });
 
                 }
-                    </script> <!--dabar reikia html tago, kad galetume sukrauti savo map'a-->
-
-
+                    </script>
 
                     <script async defer
                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtwsIAijZ2TTUVQ3tz2u_YuDPpiBXEF6k&callback=initMap">
                     </script>
                 </div>
             }
-
-           
-           
-        
     </div>
-
-
-
 </body>

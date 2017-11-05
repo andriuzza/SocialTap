@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialType.Models
 {
-    public class UserAccount: UserAccounts
+    public class UserAccount : UserAccounts
     {
         [Key]
         public int UserID { get; set; }
@@ -24,6 +23,12 @@ namespace SocialType.Models
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
+        public ICollection<NotificationUser> Notifications {get;set;}
+
+        public UserAccount()
+        {
+            Notifications = new Collection<NotificationUser>();
+        }
       
 
        

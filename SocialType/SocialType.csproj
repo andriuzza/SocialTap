@@ -116,6 +116,7 @@
     </Reference>
     <Reference Include="OpenTK.GLControl">
       <HintPath>..\packages\OpenTK.GLControl.1.1.2225.0\lib\net20\OpenTK.GLControl.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -225,11 +226,13 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\NotificationsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DrinksController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Migrations\201709250603538_login.cs" />
     <Compile Include="Migrations\201709250603538_login.Designer.cs">
@@ -239,6 +242,18 @@
     <Compile Include="Migrations\201710071223478_ImageUpload.Designer.cs">
       <DependentUpon>201710071223478_ImageUpload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711040726104_AddOneToMany.cs" />
+    <Compile Include="Migrations\201711040726104_AddOneToMany.Designer.cs">
+      <DependentUpon>201711040726104_AddOneToMany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711041120164_AddNotification.cs" />
+    <Compile Include="Migrations\201711041120164_AddNotification.Designer.cs">
+      <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotificationUser.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Services\NotificationEventArgs.cs" />
+    <Compile Include="Services\NotificationHandling.cs" />
     <Compile Include="Services\ReviewWordCount.cs" />
     <Compile Include="Models\DrinkImage.cs" />
     <Compile Include="Repositories\EFDrinksRepository.cs" />
@@ -246,6 +261,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Services\HttpContextManager.cs" />
+    <Compile Include="Services\SendNotification.cs" />
     <Compile Include="Services\SortingServices.cs" />
     <Compile Include="ViewModels\DrinkImageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -313,6 +329,8 @@
     <Content Include="Views\UserAccount\Logout.cshtml" />
     <Content Include="Views\UserAccount\LoggedOut.cshtml" />
     <Content Include="Views\Drinks\ResultOfDetection.cshtml" />
+    <Content Include="Views\Drinks\Post.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -349,6 +367,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710071223478_ImageUpload.resx">
       <DependentUpon>201710071223478_ImageUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711040726104_AddOneToMany.resx">
+      <DependentUpon>201711040726104_AddOneToMany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711041120164_AddNotification.resx">
+      <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,7 +15,26 @@ namespace SocialType.Models
         public DbSet<Location> Locations { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
         public DbSet<DrinkImage> Images { get; set; }
-       
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationUser> NotificationUsers { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Drink>()
+               .HasRequired(u => u.LocationOfDrink)
+               .WithMany(e => e.Drinks)
+               .HasForeignKey(a => a.LocationOfDrinkId)
+               .WillCascadeOnDelete(true);
+
+
+            modelBuilder.Entity<NotificationUser>()
+                .HasRequired(a => a.UserAccount)
+                .WithMany(b=>b.Notifications)
+                .WillCascadeOnDelete(false);
+
+
+        }
     }
+
+   
 }

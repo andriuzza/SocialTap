@@ -1,0 +1,13 @@
+﻿@model List<SocialType.Models.Drink>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div class="list-group">
+    @foreach (var a in Model)
+    {
+        <a href="#" class="list-group-item">Gėrimas @a.Name, kurio kaina - @a.Price pristatytas, bare </a>
+    }
+</div>

@@ -14,10 +14,11 @@
 
         @Html.TextBoxFor(model => model.Drink.Name, new { @class = "form-control", @placeholder = "Name" })
         <br />
-        @Html.DropDownListFor(model => model.Drink.DrinkTypeId, new SelectList(Model.TypesDrinks, "Id", "Name"), "", new { @class = "form-control", @placeholder = "Type" })
+        @Html.DropDownListFor(model => model.TypeId, new SelectList(Model.TypesDrinks, "Id", "Name"), "", new { @class = "form-control", @placeholder = "Type" })
         <br />
         @Html.TextBoxFor(model => model.Drink.Price, new { @class = "form-control", @placeholder = "Price" })
         <br />
+        @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control", @placeholder = "Type" })
         <input type="submit" value="Submit" class="btn btn-primary" />
         <button class="btn btn-primary" onclick="@Url.Action("Index", "Drinks")">Cancel</button>
     }

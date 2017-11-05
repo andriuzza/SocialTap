@@ -35,7 +35,7 @@ namespace SocialType.Controllers
             var vm = new LocationViewModel
             {
                 Loc = location,
-                Drinks = db.Drinks.Where(m => m.Location == location.Name).ToList(),
+                Drinks = db.Drinks.Where(m => m.LocationOfDrinkId == location.Id).ToList(),
 
                 
             };

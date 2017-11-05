@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -42,16 +43,42 @@ namespace SocialType.Controllers
             return View(sortedEl);
         }
 
-        public ActionResult Post()
+        public async Task<ActionResult> Post()
         {
-            var type = db.Types.ToList();
+            DrinkViewModel viewModel =  await GetViewModelOfDrinks();
+            return View("SaveRecord", viewModel);
+        }
+
+        private async Task<DrinkViewModel> GetViewModelOfDrinks()
+        {
+            var TypesOfDrink = await GetTypes();
+            var Locations = await GetLocations();
             var viewModel = new DrinkViewModel
             {
                 Drink = new Drink(),
-                TypesDrinks = type
+                TypesDrinks = TypesOfDrink,
+                Locations = Locations
             };
-            return View("SaveRecord",viewModel);
+
+           
+            return viewModel;
         }
+
+        public async Task<IEnumerable<DrinkType>> GetTypes()
+        {
+            return await Task.Factory.StartNew(()=> {
+                return db.Types.ToList();
+            });
+        }
+
+        public async Task<IEnumerable<Location>> GetLocations()
+        {
+            return await Task.Factory.StartNew(()=> {
+                return db.Locations.ToList();
+            }); 
+        }
+
+
 
         public ActionResult SaveRecord(DrinkViewModel vm)
         {
@@ -60,15 +87,18 @@ namespace SocialType.Controllers
                 Drink drink = new Drink();
                 drink.Name = vm.Drink.Name;
                 drink.Price = vm.Drink.Price;
-                drink.DrinkTypeId = vm.Drink.DrinkTypeId;
+                drink.DrinkTypeId = vm.TypeId;
+                drink.LocationOfDrinkId = vm.LocationId;
                 db.Drinks.Add(drink);
 
                 db.SaveChanges();
+                NotificationHandling handler = new NotificationHandling(drink);
                 return RedirectToAction("Index");
             }
             return Content("Wrong input");
         }
 
+      
         [HttpPost]
         public ActionResult Save(Drink drink, HttpPostedFileBase imageData)
         {
@@ -213,11 +243,11 @@ namespace SocialType.Controllers
 
                     int HeightDifference = (BottleY2 + BottleY1) / 2;
                     int WidthDifference = (BottleX1 + BottleX2) / 2;
-                    for (int i = BottleX1; i < BottleX2; i++)
+                 /*   for (int i = BottleX1; i < BottleX2; i++)
                     {
                         ImagePixels[HeightDifference, i] = 1;
                         img[HeightDifference, i] = CvColor.DarkBlue;
-                    }
+                    }*/
 
                     for (int i = 0; i < img.Height - 1; i++)
                     {
@@ -271,7 +301,7 @@ namespace SocialType.Controllers
 
                     double LiquidRatio1 = ((BottlePixels *1.0 - NoLiquidPixels) / BottlePixels) * 100;
                     double LiquidRatio = Math.Round(LiquidRatio1, 2);
-                    byte[] cannyBytes = img2.ToBytes(".png");
+                    byte[] cannyBytes = img.ToBytes(".png");
                     string base64 = Convert.ToBase64String(cannyBytes); /*convert image to string in base 64 encoding */
 
                     ViewBag.Ratio = LiquidRatio;

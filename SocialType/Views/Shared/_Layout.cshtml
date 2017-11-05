@@ -36,6 +36,13 @@
             @if (Session["UserID"] != null)
             {
                 <a href="~/UserAccount/Logout" class="w3-bar-item w3-button">Logout</a>
+           
+                    <a style="font-size:25px; position:relative;" href="@Url.Action("Index", "Notifications")">
+                        <span style="bottom: 0px;" class="glyphicon glyphicon-cloud"></span>
+                        <span class="badge badge-notify">4</span>
+                    </a>
+                   
+               
             }
             else
             {
@@ -70,3 +77,13 @@
         <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
+
+@section scripts {
+    <script>
+            $(document).ready(function () {
+
+            })
+
+    </script>
+  
+}

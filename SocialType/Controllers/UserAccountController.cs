@@ -2,6 +2,8 @@
 using SocialType.Services;
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -30,14 +32,77 @@ namespace SocialType.Controllers
             {
                 using(MyDbContext db = new MyDbContext())
                 {
+
                     db.UserAccount.Add(account);
+                   
                     db.SaveChanges();
+
+                    SendActivationLink <UserAccount> link = new SendActivationLink<UserAccount>();
+                    link.SendEmailEventHandler += SendActivation;
+                    link.SendEmailToTheUser(account);
+                    ViewBag.Message = "Activation successful.";
                 }
                 ModelState.Clear();
                 
                 ViewBag.Message = account.FirstName + " " + account.LastName + " Successfully registered.";
              }
+            return View(account);
+        }
+
+        public void SendActivation(UserAccount account)
+        {
+            Guid ActivationCode = Guid.NewGuid();
+
+            db.Activations.Add(new UserActivation()
+            {
+                ActivationCode = ActivationCode,
+                UserID = account.UserID
+            });
+
+            db.SaveChanges();
+
+            using (MailMessage message = new MailMessage("andrius.butkevicius1@gmail.com", account.Email))
+            {
+                message.Subject = "Activate Your Account [SocialTap]";
+                string body = "Hello, " + account.FirstName + " if you want to" +
+                    " <br>activate your registration</br>, please click on the link below";
+                body += "<br><a href= '" + string.Format("{0}://{1}/UserAccount/Activation/{2}", Request.Url.Scheme, Request.Url.Authority, ActivationCode) +
+                    "'>Click here to activate your account. </a> </br>";
+                body += "<br /><br />Thanks";
+                message.Body = body;
+                message.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential net = new NetworkCredential("andrius.butkevicius1@gmail.com", "vcds1937123");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = net;
+                smtp.Port = 587;
+                smtp.Send(message);
+
+
+            }
+
+        }
+        public ActionResult Activation()
+        {
+            ViewBag.Message = "Invalid Activation code.";
+            if (RouteData.Values["id"] != null)
+            {
+                Guid activationCode = new Guid(RouteData.Values["id"].ToString());
+                UserActivation userActivation = db.Activations.
+                    Where(p => p.ActivationCode == activationCode)
+                    .FirstOrDefault();
+                if (userActivation != null)
+                {
+                    db.Activations.Remove(userActivation);
+                    db.SaveChanges();
+                    ViewBag.Message = "Activation successful.";
+                }
+            }
+
             return View();
+
         }
 
         public ActionResult Login()
@@ -62,6 +127,8 @@ namespace SocialType.Controllers
                 return View("Login");
 
             }
+            
+
             using (MyDbContext db = new MyDbContext())
             {
                 UserAccount usr = null;

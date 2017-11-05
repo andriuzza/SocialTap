@@ -51,13 +51,21 @@ namespace SocialType.Controllers
 
         private async Task<DrinkViewModel> GetViewModelOfDrinks()
         {
-            var TypesOfDrink = await GetTypes();
-            var Locations = await GetLocations();
+
+            var Types =  GetTypes();
+            var Locations =  GetLocations();
+
+           await Task.WhenAll(GetTypes(), GetLocations());
+
+           var TypesOfDrink = await Types;
+           var AllLocations = await Locations;
+            /*WaitAll blocks the current thread until it is done */
+            /* Better use WhenAll*/
             var viewModel = new DrinkViewModel
             {
                 Drink = new Drink(),
                 TypesDrinks = TypesOfDrink,
-                Locations = Locations
+                Locations = AllLocations
             };
 
            

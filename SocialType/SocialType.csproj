@@ -250,6 +250,11 @@
     <Compile Include="Migrations\201711041120164_AddNotification.Designer.cs">
       <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711051003557_SendActivation.cs" />
+    <Compile Include="Migrations\201711051003557_SendActivation.Designer.cs">
+      <DependentUpon>201711051003557_SendActivation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserActivation.cs" />
     <Compile Include="Models\NotificationUser.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Services\NotificationEventArgs.cs" />
@@ -261,6 +266,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Services\HttpContextManager.cs" />
+    <Compile Include="Services\SendActivationLink.cs" />
     <Compile Include="Services\SendNotification.cs" />
     <Compile Include="Services\SortingServices.cs" />
     <Compile Include="ViewModels\DrinkImageViewModel.cs" />
@@ -331,6 +337,7 @@
     <Content Include="Views\Drinks\ResultOfDetection.cshtml" />
     <Content Include="Views\Drinks\Post.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\UserAccount\Activation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -373,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711041120164_AddNotification.resx">
       <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711051003557_SendActivation.resx">
+      <DependentUpon>201711051003557_SendActivation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

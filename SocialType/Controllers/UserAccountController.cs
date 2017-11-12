@@ -14,6 +14,13 @@ namespace SocialType.Controllers
     {
 
         private MyDbContext db = new MyDbContext();
+        private AccountManager accountManager;
+        private Object userAccountLock = new Object();
+
+        public UserAccountController(AccountManager accountManager)
+        {
+            this.accountManager = accountManager;
+        }
         // GET: UserAccount
         public ActionResult Index()
         {
@@ -204,5 +211,28 @@ namespace SocialType.Controllers
             db = dbContext;
         }
 
+        public ActionResult ChangePassword()
+        {
+            String userName = Session["UserName"].ToString();
+            UserAccount user = db.UserAccount.SingleOrDefault(u => u.Username == userName);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(UserAccount user)
+        {
+            lock (userAccountLock) {
+               accountManager.changePassword(user.Username, user.Password);
+            }
+            
+            return View("UserProfile");
+        }
+
+        public ActionResult UserProfile()
+        {
+            String userName = Session["UserName"].ToString();
+            UserAccount user = db.UserAccount.SingleOrDefault(u => u.Username == userName);
+            return View(user);
+        }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Windows;
 
 namespace SocialType.Services
 {
@@ -10,12 +6,12 @@ namespace SocialType.Services
     {
         public AccountNotFoundException()
         {
-            MessageBox.Show("account does not exist");
+            Console.WriteLine("account does not exist");
         }
 
         public AccountNotFoundException(String message) : base(message)
         {
-            MessageBox.Show(message);
+            Console.WriteLine(message);
         }
     }
 }

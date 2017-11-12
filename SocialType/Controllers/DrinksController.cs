@@ -45,21 +45,25 @@ namespace SocialType.Controllers
             return View(sortedEl);
         }
 
-        public ActionResult Post()
+        public async Task<ActionResult> Post()
         {
-            DrinkViewModel viewModel = GetViewModelOfDrinks();
+            DrinkViewModel viewModel = await GetViewModelOfDrinksAsync();
             return View("SaveRecord", viewModel);
         }
 
-        private DrinkViewModel GetViewModelOfDrinks()
+        private async Task<DrinkViewModel> GetViewModelOfDrinksAsync()
         {
 
-            var Types =  GetTypes();
-            var Locations =  GetLocations();
-          
+            var Types = GetTypes();
+            var Locations = GetLocations();
 
-           var TypesOfDrink = Types;
-           var AllLocations = Locations;
+            
+
+            var TypesOfDrink = await Types;
+            var AllLocations = await Locations;
+
+            await Task.WhenAll(GetTypes(), GetLocations());
+
             /*WaitAll blocks the current thread until it is done */
             /* Better use WhenAll*/
             var viewModel = new DrinkViewModel
@@ -69,20 +73,22 @@ namespace SocialType.Controllers
                 Locations = AllLocations
             };
 
-           
+
             return viewModel;
         }
 
-        public IEnumerable<DrinkType> GetTypes()
+        public async Task<IEnumerable<DrinkType>> GetTypes()
         {
-         
+            return await Task.Factory.StartNew(()=> {
                 return db.Value.Types.ToList();
-         
+            });
         }
 
-        public IEnumerable<Location> GetLocations()
+        public async Task<IEnumerable<Location>> GetLocations()
         {
+            return await Task.Factory.StartNew(()=> {
                 return db.Value.Locations.ToList();
+            }); 
         }
 
 

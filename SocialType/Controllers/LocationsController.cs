@@ -2,11 +2,9 @@
 using SocialType.Repositories;
 using SocialType.ViewModels;
 using SocialType.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Windows;
 
 namespace SocialType.Controllers
 {

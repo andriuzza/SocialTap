@@ -1,0 +1,16 @@
+﻿@model SocialType.Models.UserAccount
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<h2>User Profile</h2>
+
+<h4>Hi @Model.Username</h4>
+
+<button class="btn btn-default" onclick="location.href='/UserAccount/ChangePassword/'">Change your password</button>
+
+<h4>Your profile details:</h4>
+
+<p>First name: @Model.FirstName</p>
+<p>Last name: @Model.LastName</p>
+<p>UserName: @Model.Username</p>

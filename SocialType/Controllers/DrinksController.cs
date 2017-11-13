@@ -19,8 +19,13 @@ namespace SocialType.Controllers
     public class DrinksController : Controller
     {
         // GET: Drinks
-        private MyDbContext db = new MyDbContext();
+        private Lazy<MyDbContext> db = new Lazy<MyDbContext>();
+        private SortingServices sortingService;
 
+        public DrinksController(SortingServices sortingService)
+        {
+            this.sortingService = sortingService;
+        }
         public ActionResult Index(string sortOrder, string searchString = null)
         {
 
@@ -36,45 +41,53 @@ namespace SocialType.Controllers
             {
                 searchString = ViewBag.SearchString;
             }
-          
-
-            SortingServices data = new SortingServices();
-            IEnumerable<Drink> sortedEl = data.SortElementBy(sortOrder, searchString);
+            IEnumerable<Drink> sortedEl = sortingService.SortElementBy(sortOrder, searchString);
             return View(sortedEl);
         }
 
         public async Task<ActionResult> Post()
         {
-            DrinkViewModel viewModel =  await GetViewModelOfDrinks();
+            DrinkViewModel viewModel = await GetViewModelOfDrinksAsync();
             return View("SaveRecord", viewModel);
         }
 
-        private async Task<DrinkViewModel> GetViewModelOfDrinks()
+        private async Task<DrinkViewModel> GetViewModelOfDrinksAsync()
         {
-            var TypesOfDrink = await GetTypes();
-            var Locations = await GetLocations();
+
+            var Types = GetTypes();
+            var Locations = GetLocations();
+
+            
+
+            var TypesOfDrink = await Types;
+            var AllLocations = await Locations;
+
+            await Task.WhenAll(GetTypes(), GetLocations());
+
+            /*WaitAll blocks the current thread until it is done */
+            /* Better use WhenAll*/
             var viewModel = new DrinkViewModel
             {
                 Drink = new Drink(),
                 TypesDrinks = TypesOfDrink,
-                Locations = Locations
+                Locations = AllLocations
             };
 
-           
+
             return viewModel;
         }
 
         public async Task<IEnumerable<DrinkType>> GetTypes()
         {
             return await Task.Factory.StartNew(()=> {
-                return db.Types.ToList();
+                return db.Value.Types.ToList();
             });
         }
 
         public async Task<IEnumerable<Location>> GetLocations()
         {
             return await Task.Factory.StartNew(()=> {
-                return db.Locations.ToList();
+                return db.Value.Locations.ToList();
             }); 
         }
 
@@ -89,9 +102,9 @@ namespace SocialType.Controllers
                 drink.Price = vm.Drink.Price;
                 drink.DrinkTypeId = vm.TypeId;
                 drink.LocationOfDrinkId = vm.LocationId;
-                db.Drinks.Add(drink);
+                db.Value.Drinks.Add(drink);
 
-                db.SaveChanges();
+                db.Value.SaveChanges();
                 NotificationHandling handler = new NotificationHandling(drink);
                 return RedirectToAction("Index");
             }
@@ -108,12 +121,12 @@ namespace SocialType.Controllers
                 img.ImageOfDrink = new byte[imageData.ContentLength];
                 img.DrinkId = drink.Id;
                 imageData.InputStream.Read(img.ImageOfDrink, 0, imageData.ContentLength);
-                db.Images.Add(img);
+                db.Value.Images.Add(img);
             }
-            var item = db.Drinks.Single(m => m.Id == drink.Id);
+            var item = db.Value.Drinks.Single(m => m.Id == drink.Id);
             item.HowManyTimes++;
             item.Rating = (item.Rating + drink.Rating) / item.HowManyTimes;
-            db.SaveChanges();
+            db.Value.SaveChanges();
 
             using (var image = IplImage.FromStream(imageData.InputStream, LoadMode.Color))
             {
@@ -314,7 +327,7 @@ namespace SocialType.Controllers
 
         public ActionResult Edit(int? Id)
         {
-            var drink = db.Drinks.SingleOrDefault(m => m.Id == Id);
+            var drink = db.Value.Drinks.SingleOrDefault(m => m.Id == Id);
 
             ViewBag.NoImages = "";
 
@@ -322,7 +335,7 @@ namespace SocialType.Controllers
             {
                 return HttpNotFound();
             }
-            var imagesOfDrinks = db.Images.Where(m => m.DrinkId == Id).ToList();
+            var imagesOfDrinks = db.Value.Images.Where(m => m.DrinkId == Id).ToList();
             int skaicius = drink.Name.WordCount();
             if(imagesOfDrinks == null)
             {

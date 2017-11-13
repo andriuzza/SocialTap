@@ -51,6 +51,9 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV.DebuggerVisualizers.VS2017">
       <HintPath>..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.DebuggerVisualizers.VS2017.dll</HintPath>
     </Reference>
@@ -159,8 +162,32 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Unity.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.0.2.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.1.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.0.2.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.0.2\lib\net45\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Yuml.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -250,11 +277,27 @@
     <Compile Include="Migrations\201711041120164_AddNotification.Designer.cs">
       <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711051003557_SendActivation.cs" />
+    <Compile Include="Migrations\201711051003557_SendActivation.Designer.cs">
+      <DependentUpon>201711051003557_SendActivation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711122314375_LocationFeedback.cs" />
+    <Compile Include="Migrations\201711122314375_LocationFeedback.Designer.cs">
+      <DependentUpon>201711122314375_LocationFeedback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130002252_locationFeedbackUpdate.cs" />
+    <Compile Include="Migrations\201711130002252_locationFeedbackUpdate.Designer.cs">
+      <DependentUpon>201711130002252_locationFeedbackUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationFeedback.cs" />
+    <Compile Include="Models\UserActivation.cs" />
     <Compile Include="Models\NotificationUser.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Services\BarNotFoundException.cs" />
+    <Compile Include="Services\AccountNotFoundException.cs" />
     <Compile Include="Services\NotificationEventArgs.cs" />
     <Compile Include="Services\NotificationHandling.cs" />
+    <Compile Include="Services\AccountManager.cs" />
     <Compile Include="Services\ReviewWordCount.cs" />
     <Compile Include="Models\DrinkImage.cs" />
     <Compile Include="Repositories\EFDrinksRepository.cs" />
@@ -262,9 +305,11 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Services\HttpContextManager.cs" />
+    <Compile Include="Services\SendActivationLink.cs" />
     <Compile Include="Services\SendNotification.cs" />
     <Compile Include="Services\SortingServices.cs" />
     <Compile Include="ViewModels\DrinkImageViewModel.cs" />
+    <Compile Include="ViewModels\LocationFeedbackViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RatingViewModel.cs" />
     <Compile Include="Global.asax.cs">
@@ -332,6 +377,11 @@
     <Content Include="Views\Drinks\ResultOfDetection.cshtml" />
     <Content Include="Views\Drinks\Post.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\UserAccount\Activation.cshtml" />
+    <Content Include="Views\UserAccount\ChangePassword.cshtml" />
+    <Content Include="Views\UserAccount\UserProfile.cshtml" />
+    <Content Include="Views\Locations\Feedback.cshtml" />
+    <Content Include="Views\Locations\PostFeedback.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -374,6 +424,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711041120164_AddNotification.resx">
       <DependentUpon>201711041120164_AddNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711051003557_SendActivation.resx">
+      <DependentUpon>201711051003557_SendActivation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711122314375_LocationFeedback.resx">
+      <DependentUpon>201711122314375_LocationFeedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130002252_locationFeedbackUpdate.resx">
+      <DependentUpon>201711130002252_locationFeedbackUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

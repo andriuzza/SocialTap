@@ -17,6 +17,8 @@ namespace SocialType.Models
         public DbSet<DrinkImage> Images { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
+        public DbSet<UserActivation> Activations { get; set; }
+        public DbSet<LocationFeedback> LocationFeedbacks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

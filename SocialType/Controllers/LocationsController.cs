@@ -2,11 +2,9 @@
 using SocialType.Repositories;
 using SocialType.ViewModels;
 using SocialType.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Windows;
 
 namespace SocialType.Controllers
 {
@@ -91,6 +89,49 @@ namespace SocialType.Controllers
         {
             IEnumerable<Location> loc = repository.GetAll().ToList();
             return View(loc);
+        }
+
+
+        //~~~~~
+
+
+       
+
+        [HttpGet]
+        public ActionResult PostFeedback()
+        {
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult PostFeedback(LocationFeedback locationFeedback)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                db.LocationFeedbacks.Add(locationFeedback);
+                db.SaveChanges();
+                return RedirectToAction("feedback", new { id = locationFeedback.LocationId });
+            }
+
+
+            return View(locationFeedback);
+        }
+
+
+        public ActionResult Feedback(int Id = 1)
+        {
+
+            var location = db.Locations.Where(m => m.Id == Id).FirstOrDefault();
+            var vm = new LocationFeedbackViewModel
+            {
+                Location = location,
+                LocationFeedbacks = db.LocationFeedbacks.Where(m => m.LocationId == location.Id).ToList()
+            };
+            return View(vm);
         }
     }
 }

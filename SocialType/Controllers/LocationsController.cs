@@ -126,12 +126,24 @@ namespace SocialType.Controllers
         {
 
             var location = db.Locations.Where(m => m.Id == Id).FirstOrDefault();
+           
+            var tempFeedbacks = db.LocationFeedbacks.Where(m => m.LocationId == location.Id).ToList();
+
+            tempFeedbacks.Sort(delegate (LocationFeedback x, LocationFeedback y)
+            {
+                return x.Feedback.CompareTo(y.Feedback);
+            });
+
             var vm = new LocationFeedbackViewModel
             {
                 Location = location,
-                LocationFeedbacks = db.LocationFeedbacks.Where(m => m.LocationId == location.Id).ToList()
+                LocationFeedbacks = tempFeedbacks
+                
             };
+            
+            
             return View(vm);
         }
+        
     }
 }

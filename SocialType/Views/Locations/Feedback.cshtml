@@ -1,0 +1,33 @@
+﻿@model SocialType.ViewModels.LocationFeedbackViewModel
+
+@{
+    ViewBag.Title = "Location Feedback";
+}
+
+<h2>@Model.Location.Name</h2>
+
+<div class="col-md-6">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Feedback</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model.LocationFeedbacks)
+            {
+                <tr>
+
+                    @{
+                        <td>@a.Feedback</td>
+                        <td>@a.User</td>
+                    }
+
+                </tr>
+                        }
+        </tbody>
+    </table>
+</div>
+
+<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("PostFeedback", "Locations")'">Post Feedback</button>

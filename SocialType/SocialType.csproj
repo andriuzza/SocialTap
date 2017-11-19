@@ -141,9 +141,6 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Recaptcha, Version=1.0.5.0, Culture=neutral, PublicKeyToken=9afc4d65b28c38c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -284,12 +281,20 @@
     <Compile Include="Migrations\201711051003557_SendActivation.Designer.cs">
       <DependentUpon>201711051003557_SendActivation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711122314375_LocationFeedback.cs" />
+    <Compile Include="Migrations\201711122314375_LocationFeedback.Designer.cs">
+      <DependentUpon>201711122314375_LocationFeedback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130002252_locationFeedbackUpdate.cs" />
+    <Compile Include="Migrations\201711130002252_locationFeedbackUpdate.Designer.cs">
+      <DependentUpon>201711130002252_locationFeedbackUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationFeedback.cs" />
     <Compile Include="Models\UserActivation.cs" />
     <Compile Include="Models\NotificationUser.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Services\BarNotFoundException.cs" />
     <Compile Include="Services\AccountNotFoundException.cs" />
-    <Compile Include="Services\CaptchaResponse.cs" />
     <Compile Include="Services\NotificationEventArgs.cs" />
     <Compile Include="Services\NotificationHandling.cs" />
     <Compile Include="Services\AccountManager.cs" />
@@ -304,6 +309,7 @@
     <Compile Include="Services\SendNotification.cs" />
     <Compile Include="Services\SortingServices.cs" />
     <Compile Include="ViewModels\DrinkImageViewModel.cs" />
+    <Compile Include="ViewModels\LocationFeedbackViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RatingViewModel.cs" />
     <Compile Include="Global.asax.cs">
@@ -374,7 +380,8 @@
     <Content Include="Views\UserAccount\Activation.cshtml" />
     <Content Include="Views\UserAccount\ChangePassword.cshtml" />
     <Content Include="Views\UserAccount\UserProfile.cshtml" />
-    <Content Include="Views\UserAccount\ForgotPassword.cshtml" />
+    <Content Include="Views\Locations\Feedback.cshtml" />
+    <Content Include="Views\Locations\PostFeedback.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -420,6 +427,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711051003557_SendActivation.resx">
       <DependentUpon>201711051003557_SendActivation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711122314375_LocationFeedback.resx">
+      <DependentUpon>201711122314375_LocationFeedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130002252_locationFeedbackUpdate.resx">
+      <DependentUpon>201711130002252_locationFeedbackUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -23,6 +23,11 @@ namespace SocialType.Controllers
             this.accountManager = accountManager;
             this.db = myDbContext;
         }
+
+        public UserAccountController()
+        {
+        }
+
         // GET: UserAccount
         public ActionResult Index()
         {

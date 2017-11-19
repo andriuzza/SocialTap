@@ -21,6 +21,11 @@ namespace SocialType.Controllers
         {
             this.accountManager = accountManager;
         }
+
+        public UserAccountController()
+        {
+        }
+
         // GET: UserAccount
         public ActionResult Index()
         {

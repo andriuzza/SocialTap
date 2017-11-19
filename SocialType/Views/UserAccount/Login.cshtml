@@ -1,4 +1,7 @@
-﻿@model SocialType.Models.UserAccount
+﻿<head>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+@model SocialType.Models.UserAccount
 
 @{
     ViewBag.Title = "Login";
@@ -29,6 +32,7 @@
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="g-recaptcha" data-sitekey="6LcohDkUAAAAAI1Kc1JL7Dk7RaJDL1LwUXy_VYZS"></div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

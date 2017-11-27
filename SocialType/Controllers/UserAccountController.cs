@@ -1,4 +1,5 @@
-﻿using SocialType.Models;
+﻿using Newtonsoft.Json;
+using SocialType.Models;
 using SocialType.Services;
 using System;
 using System.Linq;
@@ -13,13 +14,14 @@ namespace SocialType.Controllers
     public class UserAccountController : Controller
     {
 
-        private MyDbContext db = new MyDbContext();
+        private MyDbContext db;
         private AccountManager accountManager;
         private Object userAccountLock = new Object();
 
-        public UserAccountController(AccountManager accountManager)
+        public UserAccountController(AccountManager accountManager, MyDbContext myDbContext)
         {
             this.accountManager = accountManager;
+            this.db = myDbContext;
         }
 
         public UserAccountController()
@@ -132,6 +134,51 @@ namespace SocialType.Controllers
         [HttpPost]
         public ActionResult Login(UserAccount user)
         {
+            var response = Request["g-recaptcha-response"];
+   
+            string secret = System.Configuration.ConfigurationManager.AppSettings["ReCaptchaPrivateKey"];
+
+            var client = new WebClient();
+            var reply =
+                client.DownloadString(
+                    string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
+
+            var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
+
+            //when response is false check for the error message
+            if (!captchaResponse.Success)
+            {
+                if (captchaResponse.ErrorCodes.Count <= 0) return View();
+
+                var error = captchaResponse.ErrorCodes[0].ToLower();
+                switch (error)
+                {
+                    case ("missing-input-secret"):
+                        ModelState.AddModelError("", "The secret parameter is missing.");
+                        break;
+                    case ("invalid-input-secret"):
+                        ModelState.AddModelError("", "The secret parameter is invalid or malformed.");
+                        break;
+
+                    case ("missing-input-response"):
+                        ModelState.AddModelError("", "Please fill the captcha and try again.");
+                        break;
+                    case ("invalid-input-response"):
+                        ModelState.AddModelError("","The response is invalid");
+                        break;
+
+                    default:
+                        ModelState.AddModelError("", "Error occured. Please try again");
+                        break;
+                }
+                return View();
+            }
+            else
+            {
+                ViewBag.Message = "Valid";
+            }
+
+
             Regex regex = new Regex("^[a-zA-Z''-'\\s]{1,40}$");
             if (!regex.IsMatch(user.Username))
             {
@@ -238,6 +285,11 @@ namespace SocialType.Controllers
             String userName = Session["UserName"].ToString();
             UserAccount user = db.UserAccount.SingleOrDefault(u => u.Username == userName);
             return View(user);
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
         }
     }
 }

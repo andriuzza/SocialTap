@@ -6,6 +6,7 @@ using System.Windows;
 
 namespace SocialType.Services
 {
+    // TODO kimutis : should be moved to another location
     public class BarNotFoundException : Exception
     {
         public BarNotFoundException(string message) : base(message)

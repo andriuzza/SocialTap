@@ -2,6 +2,7 @@
 
 namespace SocialType.Models
 {
+    // TODO kimutis : for all models - restrictions for strings should be added fo length
     public class Drink
     {
      

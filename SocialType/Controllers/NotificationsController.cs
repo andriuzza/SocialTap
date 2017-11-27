@@ -12,6 +12,7 @@ namespace SocialType.Controllers
         MyDbContext db;
         public NotificationsController()
         {
+            // TODO kimutis : fix it
             db = new MyDbContext();
         }
         public ActionResult Index()
@@ -23,6 +24,8 @@ namespace SocialType.Controllers
                 .Select(b => b.Notification)
                 .Include(c=> c.Drink)
                 .ToList();
+
+            // TODO kimutis : var a?
             var a = notifications.Select(e => e.Drink).ToList();
             return View(a);
         }

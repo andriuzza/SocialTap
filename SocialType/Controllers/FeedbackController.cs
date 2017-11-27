@@ -6,6 +6,7 @@ namespace SocialType.Controllers
     public class FeedbackController : Controller
     {
         // GET: Feedback
+        // TODO kimutis : ?
         private MyDbContext db = new MyDbContext();
 
         public ActionResult Index()

@@ -16,6 +16,7 @@ namespace SocialType.Controllers
             return View();
         }
 
+        // TODO kimutis : ?
         public ActionResult Canny(HttpPostedFileBase imageData)
         {
           

@@ -28,7 +28,7 @@ namespace SocialType.Controllers
         }
         public ActionResult Index(string sortOrder, string searchString = null)
         {
-
+            // TODO kimutis : sorting names should be refactored to enum
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.RateSortParm = sortOrder == "Rating" ? "rating_desc" : "Rating";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
@@ -45,11 +45,14 @@ namespace SocialType.Controllers
             return View(sortedEl);
         }
 
+        // TODO kimutis : what this method is supposed to do?
         public async Task<ActionResult> Post()
         {
             var Types = GetTypes();
             var Locations = GetLocations();
             await Task.WhenAll(Types, Locations);
+
+            // TODO kimutis : do we need these awaits?
             var TypesOfDrink = await Types;
             var AllLocations = await Locations;
            
@@ -63,7 +66,7 @@ namespace SocialType.Controllers
 
             DrinkViewModel viewModel = new DrinkViewModel
             {
-                Drink = new Drink(),
+                Drink = new Drink(), // TODO kimutis : ?
                 TypesDrinks = TypesOfDrink,
                 Locations = AllLocations
             };
@@ -74,6 +77,8 @@ namespace SocialType.Controllers
 
         public async Task<IEnumerable<DrinkType>> GetTypes()
         {
+            // TODO kimutis : we should be working with database in one class, that is responsible for it. 
+            // that way it will be easier to maintain, and not to add duplicate functionality
             return await Task.Factory.StartNew(()=> {
                 using (MyDbContext db = new MyDbContext())
                 {
@@ -85,6 +90,7 @@ namespace SocialType.Controllers
 
         public async Task<IEnumerable<Location>> GetLocations()
         {
+            // TODO kimutis : same as above
             return await Task.Factory.StartNew(()=> {
                 using (MyDbContext db = new MyDbContext())
                 {
@@ -99,16 +105,19 @@ namespace SocialType.Controllers
         {
             using (MyDbContext db = new MyDbContext())
             {
+                // TODO kimutis : what if price is < 0 ?
                 if (vm.Drink.Name != null && vm.Drink.Price != 0)
                 {
+                    // TODO kimutis : use object initializer
                     Drink drink = new Drink();
                     drink.Name = vm.Drink.Name;
                     drink.Price = vm.Drink.Price;
                     drink.DrinkTypeId = vm.TypeId;
                     drink.LocationOfDrinkId = vm.LocationId;
-                   // db.Drinks.Add(drink);
+                    // TODO kimutis : remove comments
+                    // db.Drinks.Add(drink);
 
-                   // db.SaveChanges();
+                    // db.SaveChanges();
                     NotificationHandling handler = new NotificationHandling(drink);
                     return RedirectToAction("Index");
                 }
@@ -136,8 +145,8 @@ namespace SocialType.Controllers
                 item.Rating = (item.Rating + drink.Rating) / item.HowManyTimes;
                 db.SaveChanges();
             }
-               
 
+            // TODO kimutis : this is not saving anymore
             using (var image = IplImage.FromStream(imageData.InputStream, LoadMode.Color))
             {
 
@@ -157,21 +166,23 @@ namespace SocialType.Controllers
 
                     DetectEdges(img, arr, imageOfNewDrink, imageWithoutEffects);
 
+                    // TODO kimutis : ?
 
-                    
-                 /*   for (int i = BottleX1; i < BottleX2; i++)
-                    {
-                        ImagePixels[HeightDifference, i] = 1;
-                        img[HeightDifference, i] = CvColor.DarkBlue;
-                    }*/
+                    /*   for (int i = BottleX1; i < BottleX2; i++)
+                       {
+                           ImagePixels[HeightDifference, i] = 1;
+                           img[HeightDifference, i] = CvColor.DarkBlue;
+                       }*/
 
-                  
+
 
                 }
             }
 
             return View("ResultOfDetection");
         }
+
+        // TODO kimutis : this should be moved out of controller
         private int[,] CalculatePixels(IplImage cannyImage, IplImage img)
         {
             var arr = new int[cannyImage.Height, cannyImage.Width];
@@ -201,6 +212,7 @@ namespace SocialType.Controllers
 
         }
 
+        // TODO kimutis : this should be moved out of controller
         private void DetectEdges(IplImage img, int[,] arr, Bitmap imageOfNewDrink, IplImage imageWithoutEffects)
         {
              
@@ -297,8 +309,8 @@ namespace SocialType.Controllers
 
             }
 
-    
 
+        // TODO kimutis : this should be moved out of controller
         private void GetImageResult(int BottleY2, int BottleY1, int BottleX1, int BottleX2, int[,] ImagePixels
             ,IplImage img, Bitmap imageOfNewDrink, IplImage imageWithoutEffects)
         {
@@ -366,6 +378,7 @@ namespace SocialType.Controllers
 
         public ActionResult Edit(int? Id)
         {
+            // TODO kimutis : bad spacing
             using (MyDbContext db = new MyDbContext())
             {
                    var drink = db.Drinks.SingleOrDefault(m => m.Id == Id);
@@ -377,6 +390,7 @@ namespace SocialType.Controllers
                 return HttpNotFound();
             }
             var imagesOfDrinks = db.Images.Where(m => m.DrinkId == Id).ToList();
+                 // TODO kimutis : skaicius?
             int skaicius = drink.Name.WordCount();
             if(imagesOfDrinks == null)
             {

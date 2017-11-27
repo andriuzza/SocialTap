@@ -98,9 +98,9 @@ namespace SocialType.Controllers
        
 
         [HttpGet]
-        public ActionResult PostFeedback()
+        public ActionResult PostFeedback(int id)
         {
-
+            ViewBag.id = id;
             return View();
 
         }

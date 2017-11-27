@@ -295,6 +295,7 @@
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Services\BarNotFoundException.cs" />
     <Compile Include="Services\AccountNotFoundException.cs" />
+    <Compile Include="Services\CaptchaResponse.cs" />
     <Compile Include="Services\NotificationEventArgs.cs" />
     <Compile Include="Services\NotificationHandling.cs" />
     <Compile Include="Services\AccountManager.cs" />

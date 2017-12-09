@@ -8,9 +8,10 @@ namespace SocialType.Services
 {
     public class AccountManager
     {
+        // TODO kimutis : fix it
         Lazy<MyDbContext> db = new Lazy<MyDbContext>();
 
-
+        // TODO kimutis : naming convention - use capital first
         public String getPassword(String userName)
         {
             UserAccount user = db.Value.UserAccount.SingleOrDefault(u => u.Username == userName);
@@ -35,7 +36,8 @@ namespace SocialType.Services
 
         public Boolean isPasswordSecure(String password)
         {
-            if(password.Length >= 5)
+            // TODO kimutis : convert to return statement
+            if (password.Length >= 5)
             {
                 return true;
             }

@@ -13,7 +13,7 @@ namespace SocialType.Controllers
 {
     public class UserAccountController : Controller
     {
-
+        // TODO kimutis : fix it
         private MyDbContext db;
         private AccountManager accountManager;
         private Object userAccountLock = new Object();
@@ -57,7 +57,8 @@ namespace SocialType.Controllers
                     ViewBag.Message = "Activation successful.";
                 }
                 ModelState.Clear();
-                
+
+                // TODO kimutis : use string interpolation
                 ViewBag.Message = account.FirstName + " " + account.LastName + " Successfully registered.";
              }
             return View(account);
@@ -75,6 +76,7 @@ namespace SocialType.Controllers
 
             db.SaveChanges();
 
+            // TODO kimutis : there should be mailing service for that
             using (MailMessage message = new MailMessage("EMAIL@gmail.com", account.Email))
             {
                 message.Subject = "Activate Your Account [SocialTap]";
@@ -100,6 +102,7 @@ namespace SocialType.Controllers
         }
         public ActionResult Activation()
         {
+            // TODO kimutis : all hardcoded values should be moved to Constants class
             ViewBag.Message = "Invalid Activation code.";
             if (RouteData.Values["id"] != null)
             {
@@ -121,7 +124,7 @@ namespace SocialType.Controllers
 
         public ActionResult Login()
         {
-            
+            // TODO kimutis : use ternary operator here
             if (HttpContextManager.Current.Session["UserID"] == null)
             {
                 return View("Login");
@@ -131,6 +134,7 @@ namespace SocialType.Controllers
             }
         }
 
+        // TODO kimutis : okay, not even reading the method, because its way too long. Please, extract it to more specific services/methods
         [HttpPost]
         public ActionResult Login(UserAccount user)
         {
@@ -217,6 +221,7 @@ namespace SocialType.Controllers
 
         public ActionResult LoggedIn()
         {
+            // TODO kimutis : use ternary operator
             if (HttpContextManager.Current.Session["UserID"] != null)
             {
                 return View();
@@ -229,6 +234,7 @@ namespace SocialType.Controllers
 
         public ActionResult LogOut()
         {
+            // TODO kimutis : use ternary operator
             if (HttpContextManager.Current.Session["UserID"] != null)
             {
                 return View("LogOut");
@@ -251,18 +257,20 @@ namespace SocialType.Controllers
         public ActionResult NotLoggedIn()
         {
             return View();
-        } 
+        }
 
+        // TODO kimutis : ?
         public MyDbContext getDb()
         {
             return db;
         }
 
+        // TODO kimutis : ?
         public void setDb(MyDbContext dbContext)
         {
             db = dbContext;
         }
-
+      
         public ActionResult ChangePassword()
         {
             String userName = Session["UserName"].ToString();
@@ -283,6 +291,7 @@ namespace SocialType.Controllers
         public ActionResult UserProfile()
         {
             String userName = Session["UserName"].ToString();
+            // TODO kimutis : what if there are two users? should be handled
             UserAccount user = db.UserAccount.SingleOrDefault(u => u.Username == userName);
             return View(user);
         }

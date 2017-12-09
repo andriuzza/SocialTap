@@ -2,6 +2,7 @@
 
 namespace SocialType.Services
 {
+    // TODO kimutis : should be move to another location
     public class AccountNotFoundException : Exception
     {
         public AccountNotFoundException()
